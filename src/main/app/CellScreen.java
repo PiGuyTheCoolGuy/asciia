@@ -13,6 +13,9 @@ public class CellScreen extends Screen {
 
     private static final Vec2i CELL_SIZE = new Vec2i(8, 16);
 
+    private final Vec2i size = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
+            (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getHeight());
+
     public CellScreen(String title, double x, double y, double width, double height) {
         super(title, x, y, width, height);
         setup();
@@ -32,14 +35,11 @@ public class CellScreen extends Screen {
 
         fullscreenOnSecondaryMonitor();
 
-        Rectangle2D bounds = javafx.stage.Screen.getScreens().get(1).getVisualBounds();
-        Vec2i screenSize = new Vec2i((int) bounds.getWidth(), (int) bounds.getHeight());
-
-        System.out.println("Screen size: " + screenSize);
+        System.out.println("Screen size: " + size);
         System.out.println(javafx.stage.Screen.getScreens().get(1));
 
-        int rows = screenSize.y / CELL_SIZE.y;
-        int cols = screenSize.x / CELL_SIZE.x;
+        int rows = size.y / CELL_SIZE.y;
+        int cols = size.x / CELL_SIZE.x;
         initCells(rows, cols);
     }
 
@@ -54,13 +54,8 @@ public class CellScreen extends Screen {
 
     @Override
     protected void render(StackPane root) {
-        System.out.println("Rendering CellScreen...");
-        setContent("PLAYER VIEW..");
-        Vec2i screenSize = getSize().copy();
-        int rows = screenSize.y / CELL_SIZE.y;
-        int cols = screenSize.x / CELL_SIZE.x;
-
-        System.out.println("Screen size: " + screenSize);
+        int rows = size.y / CELL_SIZE.y;
+        int cols = size.x / CELL_SIZE.x;
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
@@ -68,8 +63,8 @@ public class CellScreen extends Screen {
                 cells[i][j].setCharacter('w');
 
                 cells[i][j].render(
-                        new Vec2i(j * CELL_SIZE.x - screenSize.x / 2 + CELL_SIZE.x / 2,
-                                i * CELL_SIZE.y - screenSize.y / 2 + CELL_SIZE.y / 2),
+                        new Vec2i(j * CELL_SIZE.x - size.x / 2 + CELL_SIZE.x / 2,
+                                i * CELL_SIZE.y - size.y / 2 + CELL_SIZE.y / 2),
                         CELL_SIZE, root);
             }
         }
