@@ -13,7 +13,7 @@ public class Main extends Application {
 
         // Set basic content (placeholder for now)
         dmScreen.setContent("DM VIEW");
-        playerScreen.setContent("PLAYER VIEW");
+        // playerScreen.setContent("PLAYER VIEW");
 
         // Show both windows
         dmScreen.show();

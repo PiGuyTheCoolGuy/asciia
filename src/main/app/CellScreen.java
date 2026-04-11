@@ -41,6 +41,7 @@ public class CellScreen extends Screen {
     }
 
     public void render() {
+        System.out.println("Rendering CellScreen...");
         Vec2i screenSize = getSize().copy();
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
