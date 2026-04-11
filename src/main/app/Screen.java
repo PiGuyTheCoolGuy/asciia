@@ -59,10 +59,6 @@ public abstract class Screen {
         stage.show();
     }
 
-    public Stage getStage() {
-        return stage;
-    }
-
     public void fullscreen(boolean value) {
         stage.setFullScreen(value);
     }
@@ -70,5 +66,9 @@ public abstract class Screen {
     public Vec2i getSize() {
         System.out.println(root.getWidth() + "x" + root.getHeight());
         return new Vec2i((int) scene.getWidth(), (int) scene.getHeight());
+    }
+
+    protected Stage getStage() {
+        return stage;
     }
 }

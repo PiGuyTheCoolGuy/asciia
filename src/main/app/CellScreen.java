@@ -1,6 +1,7 @@
 package app;
 
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 
@@ -27,16 +28,9 @@ public class CellScreen extends Screen {
         setup();
     }
 
-    private void setup() {
-        var screens = javafx.stage.Screen.getScreens();
+    private void setup() { // TODO: make a ui for this or something
 
-        System.out.println(screens.size() + " screens");
-
-        for (var screen : screens) {
-            Rectangle2D bounds = screen.getBounds();
-            System.out
-                    .println("Screen: " + bounds.getWidth() + "x" + bounds.getHeight() + " " + screen.toString());
-        }
+        fullscreenOnSecondaryMonitor();
 
         // super.fullscreen(true);
         show();
@@ -75,6 +69,26 @@ public class CellScreen extends Screen {
                                 i * CELL_SIZE.y - screenSize.y / 2 + CELL_SIZE.y / 2),
                         CELL_SIZE, root);
             }
+        }
+    }
+
+    private void fullscreenOnSecondaryMonitor() {
+
+        var screens = javafx.stage.Screen.getScreens();
+        Stage stage = getStage();
+
+        if (screens.size() > 1) {
+            javafx.stage.Screen tv = screens.get(1);
+            Rectangle2D bounds = tv.getVisualBounds();
+
+            stage.setX(bounds.getMinX());
+            stage.setY(bounds.getMinY());
+            stage.setWidth(bounds.getWidth());
+            stage.setHeight(bounds.getHeight());
+
+            stage.setFullScreen(true);
+        } else {
+            stage.setFullScreen(true); // fallback
         }
     }
 
