@@ -1,0 +1,41 @@
+package app;
+
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+
+public class Screen {
+
+    private Stage stage;
+    private Scene scene;
+    private StackPane root;
+
+    public Screen(String title, double x, double y, double width, double height) {
+        stage = new Stage();
+        stage.setTitle(title);
+
+        root = new StackPane();
+        scene = new Scene(root, width, height);
+
+        stage.setScene(scene);
+
+        // Position on screen
+        stage.setX(x);
+        stage.setY(y);
+    }
+
+    // Simple content setter (for now)
+    public void setContent(String text) {
+        root.getChildren().clear();
+        root.getChildren().add(new Label(text));
+    }
+
+    public void show() {
+        stage.show();
+    }
+
+    public Stage getStage() {
+        return stage;
+    }
+}
