@@ -58,15 +58,7 @@ public class CellScreen extends Screen {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                // XXX: temp
-                cells[i][j].setCharacter('w');
-                /*
-                 * cells[i][j].render(
-                 * new Vec2i(j * CELL_SIZE.x - size.x / 2 + CELL_SIZE.x / 2,
-                 * i * CELL_SIZE.y - size.y / 2 + CELL_SIZE.y / 2),
-                 * CELL_SIZE, root);
-                 */
-                cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 4, i * CELL_SIZE.y - size.y / 2 - 6),
+                cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 5, i * CELL_SIZE.y - size.y / 2 - 6),
                         CELL_SIZE,
                         root);
             }
