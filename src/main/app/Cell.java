@@ -67,20 +67,32 @@ public class Cell {
     }
 
     // Position here is in pixel coordinates, not cell coordinates
-    public void render(Vec2i position, Vec2i cellSize, StackPane root) {
+    public void render(Vec2i position, Vec2i cellSize) {
+
+        // --- Background ---
         background.setWidth(cellSize.x);
         background.setHeight(cellSize.y);
         background.setFill(bColor);
-        background.setTranslateX(position.x);
-        background.setTranslateY(position.y);
+        background.setLayoutX(position.x);
+        background.setLayoutY(position.y);
 
+        // --- Character ---
         characterLabel.setText(String.valueOf(character));
         characterLabel.setTextFill(fColor);
-        characterLabel.setTranslateX(position.x);
-        characterLabel.setTranslateY(position.y);
-        characterLabel.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: " + cellSize.y + "px;");
 
-        root.getChildren().addAll(background, characterLabel);
+        // Match cell size
+        characterLabel.setMinSize(cellSize.x, cellSize.y);
+        characterLabel.setPrefSize(cellSize.x, cellSize.y);
+
+        // Position
+        characterLabel.setLayoutX(position.x);
+        characterLabel.setLayoutY(position.y);
+
+        double fontSize = cellSize.y * 0.8;
+
+        characterLabel.setStyle(
+                "-fx-font-family: 'Consolas'; " +
+                        "-fx-font-size: " + fontSize + "px;");
     }
 
 }
