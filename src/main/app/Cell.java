@@ -78,7 +78,7 @@ public class Cell {
         characterLabel.setTextFill(fColor);
         characterLabel.setTranslateX(position.x);
         characterLabel.setTranslateY(position.y);
-        characterLabel.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: " + cellSize.x + "px;");
+        characterLabel.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: " + cellSize.y + "px;");
 
         root.getChildren().addAll(background, characterLabel);
     }
