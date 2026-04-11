@@ -51,6 +51,7 @@ public abstract class Screen {
 
     private void render() {
         // Override in subclasses for custom rendering
+        System.out.println("Rendering " + stage.getTitle() + "...");
     }
 
     public void show() {
