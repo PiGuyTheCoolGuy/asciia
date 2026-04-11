@@ -2,7 +2,6 @@ package app;
 
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-import javafx.collections.ObservableList;
 import javafx.geometry.Rectangle2D;
 
 public class CellScreen extends Screen {
