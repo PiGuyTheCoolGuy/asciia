@@ -22,6 +22,8 @@ public abstract class Screen {
 
         stage.setX(x);
         stage.setY(y);
+
+        stage.show();
     }
 
     public Screen(String title, double width, double height) {
@@ -32,6 +34,7 @@ public abstract class Screen {
         scene = new Scene(root, width, height);
 
         stage.setScene(scene);
+        stage.show();
     }
 
     public Screen(String title) {
@@ -42,6 +45,7 @@ public abstract class Screen {
         scene = new Scene(root);
 
         stage.setScene(scene);
+        stage.show();
     }
 
     public void setContent(String text) {

@@ -31,11 +31,10 @@ public class CellScreen extends Screen {
     private void setup() { // TODO: make a ui for this or something
 
         fullscreenOnSecondaryMonitor();
+        show();
 
         System.out.println("full on sec mon, size: " + getSize());
 
-        // super.fullscreen(true);
-        show();
         Vec2i screenSize = getSize().copy();
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
