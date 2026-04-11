@@ -66,7 +66,8 @@ public class CellScreen extends Screen {
                  * i * CELL_SIZE.y - size.y / 2 + CELL_SIZE.y / 2),
                  * CELL_SIZE, root);
                  */
-                cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 5, i * CELL_SIZE.y - size.y / 2), CELL_SIZE,
+                cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 4, i * CELL_SIZE.y - size.y / 2 - 6),
+                        CELL_SIZE,
                         root);
             }
         }
