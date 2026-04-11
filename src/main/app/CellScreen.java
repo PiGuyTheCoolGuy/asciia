@@ -10,7 +10,7 @@ public class CellScreen extends Screen {
 
     private Cell[][] cells;
 
-    private static final Vec2i CELL_SIZE = new Vec2i(8, 16);
+    private static final Vec2i CELL_SIZE = new Vec2i(16, 32);
 
     private final Vec2i size = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
             (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getHeight());
