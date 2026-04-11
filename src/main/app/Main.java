@@ -13,11 +13,14 @@ public class Main extends Application {
 
         // Set basic content (placeholder for now)
         dmScreen.setContent("DM VIEW");
-        // playerScreen.setContent("PLAYER VIEW");
+        playerScreen.setContent("PLAYER VIEW.");
 
         // Show both windows
         dmScreen.show();
         playerScreen.show();
+
+        System.out.println("DM Screen size: " + dmScreen.getSize());
+        System.out.println("Player Screen size: " + playerScreen.getSize());
     }
 
     public static void main(String[] args) {

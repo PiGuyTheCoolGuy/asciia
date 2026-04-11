@@ -9,7 +9,7 @@ public abstract class Screen {
 
     private Stage stage;
     private Scene scene;
-    protected StackPane root;
+    protected StackPane root; // TODO: make this private
 
     public Screen(String title, double x, double y, double width, double height) {
         stage = new Stage();
@@ -49,13 +49,13 @@ public abstract class Screen {
         root.getChildren().add(new Label(text));
     }
 
-    private void render() {
+    protected void render(StackPane root) {
         // Override in subclasses for custom rendering
         System.out.println("Rendering " + stage.getTitle() + "...");
     }
 
     public void show() {
-        render();
+        render(root);
         stage.show();
     }
 
@@ -68,6 +68,7 @@ public abstract class Screen {
     }
 
     public Vec2i getSize() {
+        System.out.println(root.getWidth() + "x" + root.getHeight());
         return new Vec2i((int) scene.getWidth(), (int) scene.getHeight());
     }
 }

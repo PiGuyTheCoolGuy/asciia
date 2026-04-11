@@ -1,5 +1,9 @@
 package app;
 
+import javafx.scene.layout.StackPane;
+import javafx.collections.ObservableList;
+import javafx.geometry.Rectangle2D;
+
 public class CellScreen extends Screen {
 
     // TODO: Instead of a static grid of cells, create camera to render a section
@@ -24,7 +28,18 @@ public class CellScreen extends Screen {
     }
 
     private void setup() {
-        super.fullscreen(true);
+        var screens = javafx.stage.Screen.getScreens();
+
+        System.out.println(screens.size() + " screens");
+
+        for (var screen : screens) {
+            Rectangle2D bounds = screen.getBounds();
+            System.out
+                    .println("Screen: " + bounds.getWidth() + "x" + bounds.getHeight() + " " + screen.toString());
+        }
+
+        // super.fullscreen(true);
+        show();
         Vec2i screenSize = getSize().copy();
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
@@ -40,15 +55,25 @@ public class CellScreen extends Screen {
         }
     }
 
-    public void render() {
+    @Override
+    protected void render(StackPane root) {
         System.out.println("Rendering CellScreen...");
+        setContent("PLAYER VIEW..");
         Vec2i screenSize = getSize().copy();
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
 
+        System.out.println("Screen size: " + screenSize);
+
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                cells[i][j].render(new Vec2i(j * CELL_SIZE.x, i * CELL_SIZE.y), CELL_SIZE, super.root);
+                // XXX: temp
+                cells[i][j].setCharacter('w');
+
+                cells[i][j].render(
+                        new Vec2i(j * CELL_SIZE.x - screenSize.x / 2 + CELL_SIZE.x / 2,
+                                i * CELL_SIZE.y - screenSize.y / 2 + CELL_SIZE.y / 2),
+                        CELL_SIZE, root);
             }
         }
     }
