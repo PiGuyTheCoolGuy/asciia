@@ -1,6 +1,5 @@
 package app;
 
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -8,14 +7,12 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
 
-    private char character = '#'; // default
+    private char character = '#'; // XXX: temp
     private Color fColor = Color.WHITE;
     private Color bColor = Color.BLACK;
 
     private Rectangle background;
     private Label characterLabel;
-
-    private boolean addedToRoot = false;
 
     public Cell() {
         setup();
@@ -36,61 +33,54 @@ public class Cell {
     private void setup() {
         background = new Rectangle();
 
-        characterLabel = new Label();
-        characterLabel.setAlignment(Pos.CENTER);
+        characterLabel = new Label(String.valueOf(character));
     }
 
     public char getCharacter() {
         return character;
     }
 
-    public void setCharacter(char character) {
+    public char setCharacter(char character) {
         this.character = character;
+
+        return character;
     }
 
-    // --- Rendering ---
+    public Color getfColor() {
+        return fColor;
+    }
 
-    // Position is in PIXELS, not grid coords
+    public Color setfColor(Color fColor) {
+        this.fColor = fColor;
+
+        return fColor;
+    }
+
+    public Color getbColor() {
+        return bColor;
+    }
+
+    public Color setbColor(Color bColor) {
+        this.bColor = bColor;
+
+        return bColor;
+    }
+
+    // Position here is in pixel coordinates, not cell coordinates
     public void render(Vec2i position, Vec2i cellSize, StackPane root) {
-
-        // Add to scene ONLY ONCE
-        if (!addedToRoot) {
-            root.getChildren().addAll(background, characterLabel);
-            addedToRoot = true;
-        }
-
-        // --- Background ---
         background.setWidth(cellSize.x);
         background.setHeight(cellSize.y);
         background.setFill(bColor);
-        background.setLayoutX(position.x);
-        background.setLayoutY(position.y);
+        background.setTranslateX(position.x);
+        background.setTranslateY(position.y);
 
-        // --- Character ---
         characterLabel.setText(String.valueOf(character));
         characterLabel.setTextFill(fColor);
+        characterLabel.setTranslateX(position.x);
+        characterLabel.setTranslateY(position.y);
+        characterLabel.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: " + cellSize.y * 0.8 + "px;");
 
-        // Match cell size
-        characterLabel.setMinSize(cellSize.x, cellSize.y);
-        characterLabel.setPrefSize(cellSize.x, cellSize.y);
-
-        // Position
-        characterLabel.setLayoutX(position.x);
-        characterLabel.setLayoutY(position.y);
-
-        // Scale font to actually fit the cell
-        double fontSize = cellSize.y * 0.8;
-
-        characterLabel.setStyle(
-                "-fx-font-family: 'Consolas'; " +
-                        "-fx-font-size: " + fontSize + "px;");
+        root.getChildren().addAll(background, characterLabel);
     }
 
-    public void setfColor(Color fColor) {
-        this.fColor = fColor;
-    }
-
-    public void setbColor(Color bColor) {
-        this.bColor = bColor;
-    }
 }
