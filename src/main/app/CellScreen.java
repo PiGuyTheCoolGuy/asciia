@@ -58,10 +58,13 @@ public class CellScreen extends Screen {
 
         for (int i = 0; i < rows; i++) {
             for (int j = 0; j < cols; j++) {
-                cells[i][j].setbColor(
-                        ((i + j % 2) == 0) ? javafx.scene.paint.Color.BLACK : javafx.scene.paint.Color.WHITE);
-                cells[i][j].setfColor(
-                        ((i + j % 2) == 1) ? javafx.scene.paint.Color.BLACK : javafx.scene.paint.Color.WHITE);
+                if (i + j % 2) == 0) {
+                    cells[i][j].setbColor(javafx.scene.paint.Color.BLACK);
+                    cells[i][j].setfColor(javafx.scene.paint.Color.WHITE);
+                } else {
+                    cells[i][j].setbColor(javafx.scene.paint.Color.WHITE);
+                    cells[i][j].setfColor(javafx.scene.paint.Color.BLACK);
+                }
 
                 cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 5, i * CELL_SIZE.y - size.y / 2 - 6),
                         CELL_SIZE,
