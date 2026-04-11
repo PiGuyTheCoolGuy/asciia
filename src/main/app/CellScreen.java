@@ -32,6 +32,8 @@ public class CellScreen extends Screen {
 
         fullscreenOnSecondaryMonitor();
 
+        System.out.println("full on sec mon, size: " + getSize());
+
         // super.fullscreen(true);
         show();
         Vec2i screenSize = getSize().copy();
