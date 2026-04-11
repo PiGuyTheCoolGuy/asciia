@@ -31,7 +31,7 @@ public class CellScreen extends Screen {
     private void setup() { // TODO: make a ui for this or something
 
         fullscreenOnSecondaryMonitor();
-        show();
+        getStage().show();
 
         System.out.println("full on sec mon, size: " + getSize());
 
