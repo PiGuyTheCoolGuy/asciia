@@ -34,6 +34,9 @@ public class CellScreen extends Screen {
 
         Rectangle2D bounds = javafx.stage.Screen.getScreens().get(1).getVisualBounds();
         Vec2i screenSize = new Vec2i((int) bounds.getWidth(), (int) bounds.getHeight());
+
+        System.out.println("Screen size: " + screenSize);
+
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
         initCells(rows, cols);
