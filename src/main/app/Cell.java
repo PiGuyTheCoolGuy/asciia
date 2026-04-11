@@ -1,5 +1,6 @@
 package app;
 
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -7,12 +8,14 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
 
-    private char character = '#'; // XXX: temp
+    private char character = '#'; // default
     private Color fColor = Color.WHITE;
     private Color bColor = Color.BLACK;
 
     private Rectangle background;
     private Label characterLabel;
+
+    private boolean addedToRoot = false;
 
     public Cell() {
         setup();
@@ -33,41 +36,46 @@ public class Cell {
     private void setup() {
         background = new Rectangle();
 
-        characterLabel = new Label(String.valueOf(character));
+        characterLabel = new Label();
+        characterLabel.setAlignment(Pos.CENTER);
     }
+
+    // --- Getters / Setters ---
 
     public char getCharacter() {
         return character;
     }
 
-    public char setCharacter(char character) {
+    public void setCharacter(char character) {
         this.character = character;
-
-        return character;
     }
 
-    public Color getfColor() {
+    public Color getForeground() {
         return fColor;
     }
 
-    public Color setfColor(Color fColor) {
+    public void setForeground(Color fColor) {
         this.fColor = fColor;
-
-        return fColor;
     }
 
-    public Color getbColor() {
+    public Color getBackground() {
         return bColor;
     }
 
-    public Color setbColor(Color bColor) {
+    public void setBackground(Color bColor) {
         this.bColor = bColor;
-
-        return bColor;
     }
 
-    // Position here is in pixel coordinates, not cell coordinates
-    public void render(Vec2i position, Vec2i cellSize) {
+    // --- Rendering ---
+
+    // Position is in PIXELS, not grid coords
+    public void render(Vec2i position, Vec2i cellSize, StackPane root) {
+
+        // Add to scene ONLY ONCE
+        if (!addedToRoot) {
+            root.getChildren().addAll(background, characterLabel);
+            addedToRoot = true;
+        }
 
         // --- Background ---
         background.setWidth(cellSize.x);
@@ -88,11 +96,11 @@ public class Cell {
         characterLabel.setLayoutX(position.x);
         characterLabel.setLayoutY(position.y);
 
+        // Scale font to actually fit the cell
         double fontSize = cellSize.y * 0.8;
 
         characterLabel.setStyle(
                 "-fx-font-family: 'Consolas'; " +
                         "-fx-font-size: " + fontSize + "px;");
     }
-
 }
