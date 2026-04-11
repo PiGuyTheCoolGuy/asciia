@@ -1,7 +1,8 @@
 package app;
 
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -9,14 +10,14 @@ public abstract class Screen {
 
     private Stage stage;
     private Scene scene;
-    protected StackPane root; // TODO: make this private
+    protected javafx.scene.canvas.Canvas root;
 
     public Screen(String title, double x, double y, double width, double height) {
         stage = new Stage();
         stage.setTitle(title);
 
-        root = new StackPane();
-        scene = new Scene(root, width, height);
+        root = new Canvas(width, height);
+        scene = new Scene(new StackPane(root), width, height);
 
         stage.setScene(scene);
 
@@ -30,8 +31,8 @@ public abstract class Screen {
         stage = new Stage();
         stage.setTitle(title);
 
-        root = new StackPane();
-        scene = new Scene(root, width, height);
+        root = new Canvas(width, height);
+        scene = new Scene(new StackPane(root), width, height);
 
         stage.setScene(scene);
         stage.show();
@@ -41,25 +42,22 @@ public abstract class Screen {
         stage = new Stage();
         stage.setTitle(title);
 
-        root = new StackPane();
-        scene = new Scene(root);
+        root = new Canvas(800, 600); // Default size
+        scene = new Scene(new StackPane(root), 800, 600);
 
         stage.setScene(scene);
         stage.show();
     }
 
-    public void setContent(String text) {
-        root.getChildren().clear();
-        root.getChildren().add(new Label(text));
+    protected void render(GraphicsContext gc) {
+        System.out.println("Override render(GraphicsContext gc)");
     }
 
-    protected void render(StackPane root) {
-        // Override in subclasses for custom rendering
-        System.out.println("Rendering " + stage.getTitle() + "...");
+    protected GraphicsContext gc() {
+        return root.getGraphicsContext2D();
     }
 
     public void show() {
-        render(root);
         stage.show();
     }
 

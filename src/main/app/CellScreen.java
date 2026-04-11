@@ -1,14 +1,12 @@
 package app;
 
-import javafx.scene.layout.StackPane;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.geometry.Rectangle2D;
 
 public class CellScreen extends Screen {
 
-    // TODO: Instead of a static grid of cells, create camera to render a section
-
-    private Cell[][] cells;
+    private Terminal terminal;
 
     private static final Vec2i CELL_SIZE = new Vec2i(16, 32);
 
@@ -30,47 +28,34 @@ public class CellScreen extends Screen {
         setup();
     }
 
-    private void setup() { // TODO: make a ui for this or something
+    private void setup() {
 
         fullscreenOnSecondaryMonitor();
 
         System.out.println("Screen size: " + size);
         System.out.println(javafx.stage.Screen.getScreens().get(1));
-
-        int rows = size.y / CELL_SIZE.y;
-        int cols = size.x / CELL_SIZE.x;
-        initCells(rows, cols);
-    }
-
-    private void initCells(int rows, int cols) {
-        cells = new Cell[rows][cols];
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cells[i][j] = new Cell();
-            }
-        }
     }
 
     @Override
-    protected void render(StackPane root) {
+    protected void render(GraphicsContext gc) {
         int rows = size.y / CELL_SIZE.y;
         int cols = size.x / CELL_SIZE.x;
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                if ((i + j) % 2 == 0) {
-                    cells[i][j].setbColor(javafx.scene.paint.Color.RED);
-                    cells[i][j].setfColor(javafx.scene.paint.Color.GREEN);
-                } else {
-                    cells[i][j].setbColor(javafx.scene.paint.Color.YELLOW);
-                    cells[i][j].setfColor(javafx.scene.paint.Color.BLUE);
-                }
-
-                cells[i][j].render(new Vec2i(j * CELL_SIZE.x - size.x / 2 + 5, i * CELL_SIZE.y - size.y / 2 - 6),
-                        CELL_SIZE,
-                        root);
-            }
-        }
+        /*
+         * for (int i = 0; i < rows; i++) {
+         * for (int j = 0; j < cols; j++) {
+         * if ((i + j) % 2 == 0) {
+         * cells[i][j].setbColor(javafx.scene.paint.Color.RED);
+         * cells[i][j].setfColor(javafx.scene.paint.Color.GREEN);
+         * } else {
+         * cells[i][j].setbColor(javafx.scene.paint.Color.YELLOW);
+         * cells[i][j].setfColor(javafx.scene.paint.Color.BLUE);
+         * }
+         * 
+         * }
+         * }
+         */
+        terminal.render(cols, rows);
     }
 
     private void fullscreenOnSecondaryMonitor() {

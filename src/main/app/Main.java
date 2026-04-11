@@ -11,10 +11,6 @@ public class Main extends Application {
         Screen dmScreen = new UIScreen("DM Screen", 0, 0, 800, 600);
         Screen playerScreen = new CellScreen("Player Screen");
 
-        // Set basic content (placeholder for now)
-        dmScreen.setContent("DM VIEW");
-        playerScreen.setContent("PLAYER VIEW.");
-
         // Show both windows
         dmScreen.show();
         playerScreen.show();
