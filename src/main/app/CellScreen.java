@@ -31,11 +31,9 @@ public class CellScreen extends Screen {
     private void setup() { // TODO: make a ui for this or something
 
         fullscreenOnSecondaryMonitor();
-        getStage().show();
 
-        System.out.println("full on sec mon, size: " + getSize());
-
-        Vec2i screenSize = getSize().copy();
+        Rectangle2D bounds = javafx.stage.Screen.getScreens().get(1).getVisualBounds();
+        Vec2i screenSize = new Vec2i((int) bounds.getWidth(), (int) bounds.getHeight());
         int rows = screenSize.y / CELL_SIZE.y;
         int cols = screenSize.x / CELL_SIZE.x;
         initCells(rows, cols);
