@@ -8,8 +8,8 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Create two screens
-        Screen dmScreen = new Screen("DM Screen", 0, 0, 800, 600);
-        Screen playerScreen = new Screen("Player Screen", 1920, 0, 800, 600);
+        Screen dmScreen = new UIScreen("DM Screen", 0, 0, 800, 600);
+        Screen playerScreen = new CellScreen("Player Screen");
 
         // Set basic content (placeholder for now)
         dmScreen.setContent("DM VIEW");
