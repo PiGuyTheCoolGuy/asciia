@@ -40,30 +40,12 @@ public class Cell {
         characterLabel.setAlignment(Pos.CENTER);
     }
 
-    // --- Getters / Setters ---
-
     public char getCharacter() {
         return character;
     }
 
     public void setCharacter(char character) {
         this.character = character;
-    }
-
-    public Color getForeground() {
-        return fColor;
-    }
-
-    public void setForeground(Color fColor) {
-        this.fColor = fColor;
-    }
-
-    public Color getBackground() {
-        return bColor;
-    }
-
-    public void setBackground(Color bColor) {
-        this.bColor = bColor;
     }
 
     // --- Rendering ---
@@ -102,5 +84,13 @@ public class Cell {
         characterLabel.setStyle(
                 "-fx-font-family: 'Consolas'; " +
                         "-fx-font-size: " + fontSize + "px;");
+    }
+
+    public void setfColor(Color fColor) {
+        this.fColor = fColor;
+    }
+
+    public void setbColor(Color bColor) {
+        this.bColor = bColor;
     }
 }
