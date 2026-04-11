@@ -7,7 +7,7 @@ import javafx.scene.shape.Rectangle;
 
 public class Cell {
 
-    private char character = '╱'; // XXX: temp
+    private char character = '#'; // XXX: temp
     private Color fColor = Color.WHITE;
     private Color bColor = Color.BLACK;
 
