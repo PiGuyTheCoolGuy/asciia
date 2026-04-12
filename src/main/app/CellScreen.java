@@ -12,8 +12,8 @@ public class CellScreen extends Screen {
 
     private static final Vec2i CELL_SIZE = new Vec2i(16, 16);
 
-    private final Vec2i size = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
-            (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getHeight());
+    private final Vec2i size = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth(),
+            (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight());
 
     public CellScreen(String title, double x, double y, double width, double height) {
         super(title, x, y, width, height);
@@ -26,8 +26,8 @@ public class CellScreen extends Screen {
     }
 
     public CellScreen(String title) {
-        super(title, (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
-                (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getHeight());
+        super(title, (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth(),
+                (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight());
         setup();
     }
 

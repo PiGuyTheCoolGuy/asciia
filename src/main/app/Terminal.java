@@ -27,8 +27,6 @@ public class Terminal {
         int w = (int) gc.getCanvas().getWidth();
         gc.fillRect(0, 0, w, h);
 
-        System.out.println("Canvas height: " + h);
-
         int i = 0;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
