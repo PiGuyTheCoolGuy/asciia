@@ -45,7 +45,9 @@ public class CellScreen extends Screen {
         }
 
         BitmapFont font = new BitmapFont(
-                new javafx.scene.image.Image(getClass().getResourceAsStream("./assets/fonts/vga2_16x16.png")), 16,
+                new javafx.scene.image.Image(
+                        getClass().getResourceAsStream("./src/main/app/assets/fonts/vga2_16x16.png")),
+                16,
                 16);
         terminal = new Terminal(gc(), font, cells);
     }
