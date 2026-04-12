@@ -19,6 +19,8 @@ public abstract class Screen {
         stage.setTitle(title);
 
         root = new Canvas(width, height);
+        root.setLayoutX(0);
+        root.setLayoutY(0);
         javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
         pane.getChildren().add(root);
         scene = new Scene(pane, width, height);
@@ -36,6 +38,8 @@ public abstract class Screen {
         stage.setTitle(title);
 
         root = new Canvas(width, height);
+        root.setLayoutX(0);
+        root.setLayoutY(0);
         javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
         pane.getChildren().add(root);
         scene = new Scene(pane, width, height);
@@ -49,6 +53,8 @@ public abstract class Screen {
         stage.setTitle(title);
 
         root = new Canvas(800, 600); // Default size
+        root.setLayoutX(0);
+        root.setLayoutY(0);
         javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
         pane.getChildren().add(root);
         scene = new Scene(pane, 800, 600);
