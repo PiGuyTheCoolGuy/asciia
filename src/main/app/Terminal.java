@@ -23,6 +23,7 @@ public class Terminal {
                 cols * font.getGlyphWidth(),
                 rows * font.getGlyphHeight());
 
+        int i = 0;
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
 
@@ -38,9 +39,10 @@ public class Terminal {
 
                 // character
                 font.drawChar(gc,
-                        c.character,
+                        (char) i,
                         x * font.getGlyphWidth(),
                         y * font.getGlyphHeight());
+                i++;
             }
         }
     }
