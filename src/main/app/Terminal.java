@@ -17,11 +17,11 @@ public class Terminal {
 
     public void render(int cols, int rows) {
 
-        System.out.println("Rendering terminal with " + cols + " cols and " + rows + " rows");
-
         gc.clearRect(0, 0,
                 cols * font.getGlyphWidth(),
                 rows * font.getGlyphHeight());
+
+        gc.setFill(javafx.scene.paint.Color.BLACK);
 
         int i = 0;
         for (int y = 0; y < rows; y++) {
