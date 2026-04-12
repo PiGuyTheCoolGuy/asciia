@@ -63,6 +63,8 @@ public class CellScreen extends Screen {
         int rows = size.y / CELL_SIZE.y;
         int cols = size.x / CELL_SIZE.x;
 
+        System.out.println("Rendering terminal with " + cols + " cols and " + rows + " rows");
+
         /*
          * for (int i = 0; i < rows; i++) {
          * for (int j = 0; j < cols; j++) {
