@@ -34,15 +34,16 @@ public class CellScreen extends Screen {
 
         fullscreenOnSecondaryMonitor();
 
-        System.out.println("Screen size: " + size);
-        System.out.println(javafx.stage.Screen.getScreens().get(1));
-
         cells = new Cell[size.y / CELL_SIZE.y][size.x / CELL_SIZE.x];
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
                 cells[i][j] = new Cell();
             }
         }
+
+        System.out.println("Initialized cell grid: " + cells.length + " rows x " + cells[0].length + " cols");
+        System.out.println("Cell size: " + CELL_SIZE.x + "x" + CELL_SIZE.y);
+        System.out.println("Screen size: " + size.x + "x" + size.y);
 
         // try to load font
         try {

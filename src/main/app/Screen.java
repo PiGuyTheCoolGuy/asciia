@@ -67,7 +67,6 @@ public abstract class Screen {
     }
 
     public Vec2i getSize() {
-        System.out.println(root.getWidth() + "x" + root.getHeight());
         return new Vec2i((int) scene.getWidth(), (int) scene.getHeight());
     }
 
