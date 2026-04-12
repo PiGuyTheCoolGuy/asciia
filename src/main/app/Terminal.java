@@ -17,6 +17,8 @@ public class Terminal {
 
     public void render(int cols, int rows) {
 
+        System.out.println("Rendering terminal with " + cols + " cols and " + rows + " rows");
+
         gc.clearRect(0, 0,
                 cols * font.getGlyphWidth(),
                 rows * font.getGlyphHeight());
