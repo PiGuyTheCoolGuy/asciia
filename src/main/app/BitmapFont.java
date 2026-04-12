@@ -26,6 +26,9 @@ public class BitmapFont {
         int srcX = (index % cols) * glyphWidth;
         int srcY = (index / cols) * glyphHeight;
 
+        System.out.println(
+                "Drawing char '" + c + "' at (" + x + ", " + y + ") from atlas position (" + srcX + ", " + srcY + ")");
+
         gc.drawImage(
                 atlas,
                 srcX, srcY, glyphWidth, glyphHeight,
