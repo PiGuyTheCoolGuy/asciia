@@ -1,9 +1,10 @@
 package app;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public abstract class Screen {
@@ -13,11 +14,14 @@ public abstract class Screen {
     protected javafx.scene.canvas.Canvas root;
 
     public Screen(String title, double x, double y, double width, double height) {
+
         stage = new Stage();
         stage.setTitle(title);
 
         root = new Canvas(width, height);
-        scene = new Scene(new Pane(root), width, height);
+        StackPane.setAlignment(root, Pos.TOP_LEFT);
+
+        scene = new Scene(new StackPane(root), width, height);
 
         stage.setScene(scene);
 
@@ -32,7 +36,9 @@ public abstract class Screen {
         stage.setTitle(title);
 
         root = new Canvas(width, height);
-        scene = new Scene(new Pane(root), width, height);
+        StackPane.setAlignment(root, Pos.TOP_LEFT);
+
+        scene = new Scene(new StackPane(root), width, height);
 
         stage.setScene(scene);
         stage.show();
@@ -43,7 +49,9 @@ public abstract class Screen {
         stage.setTitle(title);
 
         root = new Canvas(800, 600); // Default size
-        scene = new Scene(new Pane(root), 800, 600);
+        StackPane.setAlignment(root, Pos.TOP_LEFT);
+
+        scene = new Scene(new StackPane(root), 800, 600);
 
         stage.setScene(scene);
         stage.show();
