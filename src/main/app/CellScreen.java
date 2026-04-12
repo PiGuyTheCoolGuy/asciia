@@ -26,7 +26,7 @@ public class CellScreen extends Screen {
     }
 
     public CellScreen(String title) {
-        super(title);
+        super(title, size.x, size.y);
         setup();
     }
 
