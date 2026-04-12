@@ -58,6 +58,7 @@ public abstract class Screen {
     }
 
     public void show() {
+        render(gc());
         stage.show();
     }
 
