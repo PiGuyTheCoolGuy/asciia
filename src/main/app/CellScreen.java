@@ -26,9 +26,8 @@ public class CellScreen extends Screen {
     }
 
     public CellScreen(String title) {
-        final Vec2i s = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
+        super(title, (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getWidth(),
                 (int) javafx.stage.Screen.getScreens().get(1).getVisualBounds().getHeight());
-        super(title, s.x, s.y);
         setup();
     }
 
