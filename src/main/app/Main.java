@@ -16,8 +16,6 @@ public class Main extends Application {
         dmScreen.show();
         playerScreen.show();
 
-        System.out.println("DM Screen size: " + dmScreen.getSize());
-        System.out.println("Player Screen size: " + playerScreen.getSize());
     }
 
     public static void main(String[] args) {
