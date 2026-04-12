@@ -21,7 +21,11 @@ public class Terminal {
                 cols * font.getGlyphWidth(),
                 rows * font.getGlyphHeight());
 
+        // clear entire canvas to black
         gc.setFill(javafx.scene.paint.Color.BLACK);
+        int h = (int) gc.getCanvas().getHeight();
+        int w = (int) gc.getCanvas().getWidth();
+        gc.fillRect(0, 0, w, h);
 
         int i = 0;
         for (int y = 0; y < rows; y++) {
