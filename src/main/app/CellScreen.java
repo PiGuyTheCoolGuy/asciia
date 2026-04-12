@@ -63,22 +63,6 @@ public class CellScreen extends Screen {
         int rows = size.y / CELL_SIZE.y;
         int cols = size.x / CELL_SIZE.x;
 
-        System.out.println("Rendering terminal with " + cols + " cols and " + rows + " rows");
-
-        /*
-         * for (int i = 0; i < rows; i++) {
-         * for (int j = 0; j < cols; j++) {
-         * if ((i + j) % 2 == 0) {
-         * cells[i][j].setbColor(javafx.scene.paint.Color.RED);
-         * cells[i][j].setfColor(javafx.scene.paint.Color.GREEN);
-         * } else {
-         * cells[i][j].setbColor(javafx.scene.paint.Color.YELLOW);
-         * cells[i][j].setfColor(javafx.scene.paint.Color.BLUE);
-         * }
-         * 
-         * }
-         * }
-         */
         terminal.render(cols, rows);
     }
 
