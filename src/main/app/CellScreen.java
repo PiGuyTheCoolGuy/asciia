@@ -44,12 +44,18 @@ public class CellScreen extends Screen {
             }
         }
 
-        BitmapFont font = new BitmapFont(
-                new javafx.scene.image.Image(
-                        getClass().getResourceAsStream("~/asciia/src/main/app/assets/fonts/vga2_16x16.png")),
-                16,
-                16);
-        terminal = new Terminal(gc(), font, cells);
+        // try to load font
+        try {
+            BitmapFont testFont = new BitmapFont(
+                    new javafx.scene.image.Image(
+                            getClass().getResourceAsStream("~/asciia/src/main/app/assets/fonts/vga2_16x16.png")),
+                    16,
+                    16);
+            terminal = new Terminal(gc(), testFont, cells);
+        } catch (Exception e) {
+            System.err.println("Failed to load font: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     @Override
