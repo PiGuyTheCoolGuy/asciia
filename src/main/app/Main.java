@@ -7,7 +7,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        System.out.println(getClass().getResource("/app/assets/fonts/vga2_16x16.png"));
+        System.out.println(getClass().getResource("/assets/fonts/vga2_16x16.png"));
         System.out.println(getClass().getResource("/"));
 
         // Create two screens
