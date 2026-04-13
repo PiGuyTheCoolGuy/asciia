@@ -8,14 +8,17 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         System.out.println(getClass().getResource("/"));
-        // list all files and directoriesin directory above
-        System.out.println("Available resources:");
+        // list resources in the root directory try {
         try {
-            java.nio.file.Files.walk(java.nio.file.Paths.get(getClass().getResource("/").toURI()))
-                    .filter(java.nio.file.Files::isRegularFile)
-                    .forEach(path -> System.out.println(" - " + path.getFileName()));
+            java.net.URL url = getClass().getResource("/app");
+            System.out.println("URL: " + url);
+            java.io.File dir = new java.io.File(url.toURI());
+            System.out.println("Files in resource directory:");
+            for (java.io.File file : dir.listFiles()) {
+                System.out.println(file.getName());
+            }
         } catch (Exception e) {
-            System.err.println("Error listing resources: " + e.getMessage());
+            e.printStackTrace();
         }
 
         // Create two screens
