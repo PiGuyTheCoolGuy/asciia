@@ -12,8 +12,12 @@ public class CellScreen extends Screen {
 
     private static final Vec2i CELL_SIZE = new Vec2i(16, 16);
 
-    private final Vec2i size = new Vec2i((int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth(),
-            (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight());
+    private final Vec2i size = new Vec2i((javafx.stage.Screen.getScreens().size() > 1)
+            ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth()
+            : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getWidth(),
+            (javafx.stage.Screen.getScreens().size() > 1)
+                    ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
+                    : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
 
     public CellScreen(String title, double x, double y, double width, double height) {
         super(title, x, y, width, height);
@@ -26,8 +30,13 @@ public class CellScreen extends Screen {
     }
 
     public CellScreen(String title) {
-        super(title, (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth(),
-                (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight());
+        super(title,
+                (javafx.stage.Screen.getScreens().size() > 1)
+                        ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth()
+                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getWidth(),
+                (javafx.stage.Screen.getScreens().size() > 1)
+                        ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
+                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
         setup();
     }
 
@@ -55,6 +64,19 @@ public class CellScreen extends Screen {
                     16);
             terminal = new Terminal(gc(), testFont, cells);
         } catch (Exception e) {
+
+            try {
+                BitmapFont testFont = new BitmapFont(
+                        new javafx.scene.image.Image(
+                                getClass().getResourceAsStream("/vga2_16x16.png")),
+                        16,
+                        16);
+                terminal = new Terminal(gc(), testFont, cells);
+            } catch (Exception ex) {
+                System.err.println("Failed to load font from both paths: " + ex.getMessage());
+                ex.printStackTrace();
+            }
+
             System.err.println("Failed to load font: " + e.getMessage());
             e.printStackTrace();
         }
