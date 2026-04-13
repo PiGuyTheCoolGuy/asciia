@@ -55,28 +55,16 @@ public class CellScreen extends Screen {
         System.out.println("Cell size: " + CELL_SIZE.x + "x" + CELL_SIZE.y);
         System.out.println("Screen size: " + size.x + "x" + size.y);
 
+        // TODO: This is horrendous and needs fixing ASAP
         // try to load font
         try {
             BitmapFont testFont = new BitmapFont(
                     new javafx.scene.image.Image(
-                            getClass().getResourceAsStream("/assets/fonts/vga2_16x16.png")),
+                            getClass().getResourceAsStream("/app/assets/fonts/vga2_16x16.png")),
                     16,
                     16);
             terminal = new Terminal(gc(), testFont, cells);
         } catch (Exception e) {
-
-            try {
-                BitmapFont testFont = new BitmapFont(
-                        new javafx.scene.image.Image(
-                                getClass().getResourceAsStream("/vga2_16x16.png")),
-                        16,
-                        16);
-                terminal = new Terminal(gc(), testFont, cells);
-            } catch (Exception ex) {
-                System.err.println("Failed to load font from both paths: " + ex.getMessage());
-                ex.printStackTrace();
-            }
-
             System.err.println("Failed to load font: " + e.getMessage());
             e.printStackTrace();
         }
