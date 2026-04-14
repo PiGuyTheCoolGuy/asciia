@@ -81,6 +81,7 @@ public class CellScreen extends Screen {
 
         var screens = javafx.stage.Screen.getScreens();
         Stage stage = getStage();
+        stage.setFullScreenExitHint("");
 
         if (screens.size() > 1) {
             javafx.stage.Screen tv = screens.get(1);
@@ -103,6 +104,12 @@ public class CellScreen extends Screen {
         return old;
     }
 
+    public Cell setCell(int x, int y, Cell cell) {
+        Cell old = cells[y][x];
+        cells[y][x] = cell;
+        return old;
+    }
+
     public void setString(Vec2i pos, String string) {
         int x = pos.x;
         int y = pos.y;
@@ -121,7 +128,18 @@ public class CellScreen extends Screen {
             cells[y][x].character = i;
             x++;
         }
+    }
 
+    public void setString(int x, int y, String string) {
+        setString(new Vec2i(x, y), string);
+    }
+
+    public int getCols() {
+        return cells[0].length;
+    }
+
+    public int getRows() {
+        return cells.length;
     }
 
 }

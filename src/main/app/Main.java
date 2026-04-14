@@ -25,11 +25,25 @@ public class Main extends Application {
         UIScreen dmScreen = new UIScreen("DM Screen", 0, 0, 800, 600);
         CellScreen playerScreen = new CellScreen("Player Screen");
 
-        playerScreen.setString(new Vec2i(80, 40), "Mega Test");
+        int row = 0;
+        int col = 0;
+        for (int i = 0; i < 256; i++) {
+            if (row >= playerScreen.getRows()) {
+                row = 0;
+                col += 8;
+            }
+            if (col >= playerScreen.getCols()) {
+                break;
+            }
+            char c = (char) i;
+            playerScreen.setString(col, row, c + " " + i);
+            row += 2;
+        }
 
         // Show both windows
         dmScreen.show();
         playerScreen.show();
+
     }
 
     public static void main(String[] args) {
