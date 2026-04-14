@@ -55,7 +55,6 @@ public class CellScreen extends Screen {
         System.out.println("Cell size: " + CELL_SIZE.x + "x" + CELL_SIZE.y);
         System.out.println("Screen size: " + size.x + "x" + size.y);
 
-        // TODO: This is horrendous and needs fixing ASAP
         // try to load font
         try {
             BitmapFont testFont = new BitmapFont(
@@ -96,6 +95,33 @@ public class CellScreen extends Screen {
         } else {
             stage.setFullScreen(true); // fallback
         }
+    }
+
+    public Cell setCell(Vec2i pos, Cell cell) {
+        Cell old = cells[pos.y][pos.x];
+        cells[pos.y][pos.x] = cell;
+        return old;
+    }
+
+    public void setString(Vec2i pos, String string) {
+        int x = pos.x;
+        int y = pos.y;
+
+        int xMax = cells[0].length;
+        int yMax = cells.length;
+
+        for (char i : string.toCharArray()) {
+            if (x >= xMax) {
+                x = 0;
+                y++;
+            }
+            if (y >= yMax) {
+                break; // stop if we exceed the screen
+            }
+            cells[y][x].character = i;
+            x++;
+        }
+
     }
 
 }

@@ -31,8 +31,6 @@ public class Terminal {
         for (int y = 0; y < rows; y++) {
             for (int x = 0; x < cols; x++) {
 
-                i = (y * cols + x) % 256; // Just for testing, cycle through ASCII chars
-
                 Cell c = cells[y][x];
 
                 // background
@@ -45,7 +43,7 @@ public class Terminal {
 
                 // character
                 font.drawChar(gc,
-                        (char) i,
+                        c.character,
                         x * font.getGlyphWidth(),
                         y * font.getGlyphHeight());
                 i++;

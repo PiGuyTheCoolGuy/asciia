@@ -22,8 +22,10 @@ public class Main extends Application {
         }
 
         // Create two screens
-        Screen dmScreen = new UIScreen("DM Screen", 0, 0, 800, 600);
-        Screen playerScreen = new CellScreen("Player Screen");
+        UIScreen dmScreen = new UIScreen("DM Screen", 0, 0, 800, 600);
+        CellScreen playerScreen = new CellScreen("Player Screen");
+
+        playerScreen.setString(new Vec2i(80, 40), "Mega Test");
 
         // Show both windows
         dmScreen.show();
