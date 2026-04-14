@@ -30,13 +30,13 @@ public class Main extends Application {
         for (int i = 0; i < 256; i++) {
             if (row >= playerScreen.getRows()) {
                 row = 0;
-                col += 8;
+                col += 10;
             }
             if (col >= playerScreen.getCols()) {
                 break;
             }
             char c = (char) i;
-            playerScreen.setString(col, row, c + " " + i);
+            playerScreen.setString(col, row, c + " " + i + " " + Integer.toHexString(i));
             row += 2;
         }
 
