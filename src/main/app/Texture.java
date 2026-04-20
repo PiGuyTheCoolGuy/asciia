@@ -51,4 +51,16 @@ public class Texture {
             throw new RuntimeException("Failed to parse texture file: " + filename, e);
         }
     }
+
+    public int getCols() {
+        return cells[0].length;
+    }
+
+    public int getRows() {
+        return cells.length;
+    }
+
+    public Cell getCell(Vec2i pos) {
+        return getCell(pos.x, pos.y);
+    }
 }

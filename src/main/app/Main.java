@@ -40,6 +40,9 @@ public class Main extends Application {
             row += 2;
         }
 
+        // Texture testTexture = new Texture("logo.txr");
+        // playerScreen.drawTexture(new Vec2i(10, 10), testTexture);
+
         // Show both windows
         dmScreen.show();
         playerScreen.show();

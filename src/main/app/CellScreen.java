@@ -99,12 +99,16 @@ public class CellScreen extends Screen {
     }
 
     public Cell setCell(Vec2i pos, Cell cell) {
+        if (pos.y < 0 || pos.y >= cells.length || pos.x < 0 || pos.x >= cells[pos.y].length)
+            return null;
         Cell old = cells[pos.y][pos.x];
         cells[pos.y][pos.x] = cell;
         return old;
     }
 
     public Cell setCell(int x, int y, Cell cell) {
+        if (y < 0 || y >= cells.length || x < 0 || x >= cells[y].length)
+            return null;
         Cell old = cells[y][x];
         cells[y][x] = cell;
         return old;
@@ -127,6 +131,15 @@ public class CellScreen extends Screen {
             }
             cells[y][x].character = i;
             x++;
+        }
+    }
+
+    public void drawTexture(Vec2i pos, Texture texture) {
+        for (int y = 0; y < texture.getRows(); y++) {
+            for (int x = 0; x < texture.getCols(); x++) {
+                Cell cell = texture.getCell(x, y);
+                setCell(pos.x + x, pos.y + y, cell);
+            }
         }
     }
 
