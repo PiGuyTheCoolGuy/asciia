@@ -30,7 +30,7 @@ public class Main extends Application {
         for (int i = 0; i < 256; i++) {
             if (row >= playerScreen.getRows()) {
                 row = 0;
-                col += 10;
+                col += 8;
             }
             if (col >= playerScreen.getCols()) {
                 break;
