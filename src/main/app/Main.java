@@ -36,7 +36,7 @@ public class Main extends Application {
                 break;
             }
             char c = (char) i;
-            playerScreen.setString(col, row, c + " " + i + " " + Integer.toHexString(i));
+            playerScreen.setString(col, row, c + " " + Integer.toHexString(i));
             row += 2;
         }
 
