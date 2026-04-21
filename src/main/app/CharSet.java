@@ -274,5 +274,5 @@ public class CharSet {
     public static final int SUPERSCRIPT_N = 0xFC;
     public static final int SUPERSCRIPT_2 = 0xFD;
     public static final int BULLET_BOX = 0xFE;
-    public static final int SPACE_2 = 0xFF;
+    public static final int SPACE_3 = 0xFF;
 }
