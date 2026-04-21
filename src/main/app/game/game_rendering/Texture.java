@@ -1,4 +1,4 @@
-package app;
+package app.game.game_rendering;
 
 public class Texture {
     private Cell[][] cells;

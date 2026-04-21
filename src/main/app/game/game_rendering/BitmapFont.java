@@ -1,4 +1,4 @@
-package app;
+package app.game.game_rendering;
 
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
