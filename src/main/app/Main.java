@@ -1,8 +1,9 @@
 package app;
 
-import app.game.game_rendering.CellScreen;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import app.game.rendering.CellScreen;
+import app.ui.rendering.UIScreen;
 
 public class Main extends Application {
 

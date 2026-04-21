@@ -1,10 +1,9 @@
-package app.game.game_rendering;
+package app.game.rendering;
 
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import app.Screen;
 import app.Vec2i;
-import app.game.game_rendering.Cell;
 import javafx.geometry.Rectangle2D;
 
 public class CellScreen extends Screen {

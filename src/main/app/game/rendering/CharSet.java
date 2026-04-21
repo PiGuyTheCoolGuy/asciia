@@ -1,4 +1,4 @@
-package app.game.game_rendering;
+package app.game.rendering;
 
 /*
 Box organization:

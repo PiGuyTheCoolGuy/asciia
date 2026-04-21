@@ -1,4 +1,6 @@
-package app.game.game_rendering;
+package app.game.rendering;
+
+import app.Vec2i;
 
 public class Texture {
     private Cell[][] cells;

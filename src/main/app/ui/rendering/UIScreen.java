@@ -1,4 +1,6 @@
-package app;
+package app.ui.rendering;
+
+import app.Screen;
 
 public class UIScreen extends Screen {
 
