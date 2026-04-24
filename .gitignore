@@ -4,3 +4,4 @@ out/
 *.log
 *.tmp
 .prettierignore
+roadmap.md

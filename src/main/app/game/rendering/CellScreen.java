@@ -100,6 +100,14 @@ public class CellScreen extends Screen {
         }
     }
 
+    public void clear() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.clear();
+            }
+        }
+    }
+
     public Cell setCell(Vec2i pos, Cell cell) {
         if (pos.y < 0 || pos.y >= cells.length || pos.x < 0 || pos.x >= cells[pos.y].length)
             return null;

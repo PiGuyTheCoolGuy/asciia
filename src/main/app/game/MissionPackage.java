@@ -1,5 +1,14 @@
 package app.game;
 
+import java.util.Vector;
+
+import app.game.world.Bot;
+import app.game.world.Entity;
+import app.game.world.Room;
+import app.game.world.Rover;
+import app.game.world.Structure;
+import app.game.world.WorldObject;
+
 /**
  * - A mission package is the Asciia equivalent of a campaign.
  * - It is played by ground control (the players in real life) talking to a
@@ -23,5 +32,52 @@ package app.game;
  * to repair the ship and return home.
  */
 public class MissionPackage {
+    private String name;
 
+    private Vector<WorldObject> worldObjects;
+
+    public MissionPackage(String name, boolean fromFile) {
+        if (fromFile) {
+            loadFromFile(name);
+        } else {
+            this.name = name;
+        }
+        worldObjects = new Vector<>();
+    }
+
+    private void loadFromFile(String fileName) {
+        // TODO: Implement loading `MissionPackage` from file
+        name = "IMPLEMENT FILE STUFF!!";
+    }
+
+    public void addWorldObject(WorldObject worldObject) {
+        worldObjects.add(worldObject);
+    }
+
+    public void update() {
+        for (WorldObject worldObject : worldObjects) {
+            if (worldObject instanceof Entity) {
+                if (worldObject instanceof Rover)
+                    ((Rover) worldObject).update();
+                else if (worldObject instanceof Bot)
+                    ((Bot) worldObject).update();
+            } else if (worldObject instanceof Structure) {
+                if (worldObject instanceof Room)
+                    ((Room) worldObject).update();
+            }
+        }
+    }
+
+    public void render() { // XXX
+        for (WorldObject worldObject : worldObjects)
+            worldObject.render();
+
+    }
+
+    public void save() { // XXX
+    }
+
+    public String getName() {
+        return name;
+    }
 }

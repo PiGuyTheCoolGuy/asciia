@@ -48,4 +48,12 @@ public class Terminal {
             }
         }
     }
+
+    public void clear() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.clear();
+            }
+        }
+    }
 }

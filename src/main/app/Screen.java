@@ -85,4 +85,12 @@ public abstract class Screen {
     protected Stage getStage() {
         return stage;
     }
+
+    public void configInput(InputHandler input) {
+        scene.setOnKeyPressed(e -> input.keyPressed(e.getCode()));
+    }
+
+    public void close() {
+        stage.close();
+    }
 }

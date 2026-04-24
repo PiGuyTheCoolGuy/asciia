@@ -21,4 +21,10 @@ public class Cell {
         this.bColor = bColor;
     }
 
+    public void clear() {
+        character = ' ';
+        fColor = Color.WHITE;
+        bColor = Color.BLACK;
+    }
+
 }
