@@ -4,4 +4,5 @@ out/
 *.log
 *.tmp
 .prettierignore
+.VSCodeCounter
 roadmap.md
