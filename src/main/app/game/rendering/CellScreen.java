@@ -1,6 +1,5 @@
 package app.game.rendering;
 
-import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import app.Screen;
 import app.Vec2i;
@@ -72,11 +71,13 @@ public class CellScreen extends Screen {
     }
 
     @Override
-    protected void render(GraphicsContext gc) {
+    public void render() {
         int rows = size.y / CELL_SIZE.y;
         int cols = size.x / CELL_SIZE.x;
 
         terminal.render(cols, rows);
+
+        stage.show();
     }
 
     private void fullscreenOnSecondaryMonitor() {

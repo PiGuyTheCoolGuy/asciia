@@ -16,4 +16,9 @@ public class UIScreen extends Screen {
         super(title);
     }
 
+    @Override
+    public void render() {
+
+    }
+
 }

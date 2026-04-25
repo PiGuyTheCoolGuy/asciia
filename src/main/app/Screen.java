@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 
 public abstract class Screen {
 
-    private Stage stage;
+    protected Stage stage;
     private Scene scene;
     protected javafx.scene.canvas.Canvas root;
 
@@ -61,18 +61,18 @@ public abstract class Screen {
         stage.show();
     }
 
-    protected void render(GraphicsContext gc) {
-        System.out.println("Override render(GraphicsContext gc)");
-    }
+    public abstract void render();
 
     protected GraphicsContext gc() {
         return root.getGraphicsContext2D();
     }
 
-    public void show() {
-        render(gc());
-        stage.show();
-    }
+    /*
+     * public void show() {
+     * render(gc());
+     * stage.show();
+     * }
+     */
 
     public void fullscreen(boolean value) {
         stage.setFullScreen(value);

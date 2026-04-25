@@ -2,7 +2,6 @@ package app.game;
 
 import app.InputHandler;
 import app.game.rendering.CellScreen;
-import app.game.rendering.Color;
 
 public class GameInstance {
     private MissionPackage missionPackage;
@@ -24,7 +23,7 @@ public class GameInstance {
 
         this.missionPackageName = missionPackage.getName();
 
-        screen = new CellScreen("Asciia - " + missionPackageName);
+        screen = new CellScreen("Asciia - " + this.missionPackageName);
 
         screen.configInput(input);
 
@@ -45,16 +44,9 @@ public class GameInstance {
     public void render() {
         screen.clear();
 
-        // XXX: test start
-        // random color
-        Color color1 = Color.values()[(int) (Math.random() * Color.values().length)];
-        Color color2 = Color.values()[(int) (Math.random() * Color.values().length)];
-        screen.setString(10, 10, input.getLastKey(), color1, color2);
-        // test end
-
         missionPackage.render();
 
-        screen.show();
+        screen.render();
     }
 
     public void stop() {

@@ -4,11 +4,13 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import app.game.GameInstance;
+import app.ui.ControlPanel;
 import javafx.application.Platform;
 
 public class Main extends Application {
 
     private GameInstance gameInstance;
+    private ControlPanel controlPanel;
 
     private boolean running = true;
 
@@ -17,6 +19,9 @@ public class Main extends Application {
         // TODO: figure out where the mission package is coming from
         gameInstance = new GameInstance("Test", false);
         gameInstance.setOnStop(() -> running = false);
+
+        controlPanel = new ControlPanel();
+        controlPanel.render();
 
         run();
 
@@ -30,6 +35,9 @@ public class Main extends Application {
 
                 gameInstance.update();
                 gameInstance.render();
+
+                controlPanel.update();
+                controlPanel.render();
 
                 if (!running) {
                     stop();
