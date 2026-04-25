@@ -2,6 +2,7 @@ package app.game;
 
 import app.InputHandler;
 import app.game.rendering.CellScreen;
+import app.game.rendering.Color;
 
 public class GameInstance {
     private MissionPackage missionPackage;
@@ -33,6 +34,10 @@ public class GameInstance {
         if (input.isKeyPressed(javafx.scene.input.KeyCode.ESCAPE)) {
             requestStop();
         }
+        if (input.isKeyPressed(javafx.scene.input.KeyCode.TAB)) {
+            screen.switchFullscreenMonitor();
+            input.resetAll();
+        }
 
         missionPackage.update();
     }
@@ -40,8 +45,12 @@ public class GameInstance {
     public void render() {
         screen.clear();
 
-        // XXX: More testing here prolly
-        screen.setString(10, 10, input.getLastKey());
+        // XXX: test start
+        // random color
+        Color color1 = Color.values()[(int) (Math.random() * Color.values().length)];
+        Color color2 = Color.values()[(int) (Math.random() * Color.values().length)];
+        screen.setString(10, 10, input.getLastKey(), color1, color2);
+        // test end
 
         missionPackage.render();
 

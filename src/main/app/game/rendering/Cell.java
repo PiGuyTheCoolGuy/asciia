@@ -1,12 +1,10 @@
 package app.game.rendering;
 
-import javafx.scene.paint.Color;
-
 public class Cell {
 
     public char character = ' ';
-    public Color fColor = Color.WHITE;
-    public Color bColor = Color.BLACK;
+    public Color fg = Color.WHITE;
+    public Color bg = Color.BLACK;
 
     Cell() {
     }
@@ -15,16 +13,16 @@ public class Cell {
         this.character = character;
     }
 
-    Cell(char character, Color fColor, Color bColor) {
+    Cell(char character, Color fg, Color bg) {
         this.character = character;
-        this.fColor = fColor;
-        this.bColor = bColor;
+        this.fg = fg;
+        this.bg = bg;
     }
 
     public void clear() {
         character = ' ';
-        fColor = Color.WHITE;
-        bColor = Color.BLACK;
+        fg = Color.WHITE;
+        bg = Color.BLACK;
     }
 
 }

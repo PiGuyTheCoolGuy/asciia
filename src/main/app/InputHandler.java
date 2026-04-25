@@ -46,4 +46,11 @@ public class InputHandler {
     public String getLastKey() {
         return lastKey;
     }
+
+    public void resetAll() {
+        keysDown.clear();
+        keysPressed.clear();
+        keysReleased.clear();
+        lastKey = "";
+    }
 }

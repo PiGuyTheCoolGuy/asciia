@@ -100,6 +100,35 @@ public class CellScreen extends Screen {
         }
     }
 
+    public void switchFullscreenMonitor() {
+        var screens = javafx.stage.Screen.getScreens();
+        Stage stage = getStage();
+
+        if (screens.size() > 1) {
+            javafx.stage.Screen currentScreen = null;
+            for (javafx.stage.Screen s : screens) {
+                if (s.getBounds().contains(stage.getX(), stage.getY())) {
+                    currentScreen = s;
+                    break;
+                }
+            }
+
+            if (currentScreen != null) {
+                javafx.stage.Screen targetScreen = (currentScreen == screens.get(0)) ? screens.get(1) : screens.get(0);
+                Rectangle2D bounds = targetScreen.getVisualBounds();
+
+                stage.setX(bounds.getMinX());
+                stage.setY(bounds.getMinY());
+                stage.setWidth(bounds.getWidth());
+                stage.setHeight(bounds.getHeight());
+
+                stage.setFullScreen(true);
+            }
+        } else {
+            stage.setFullScreen(true); // fallback
+        }
+    }
+
     public void clear() {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
@@ -125,6 +154,14 @@ public class CellScreen extends Screen {
     }
 
     public void setString(Vec2i pos, String string) {
+        setString(pos, string, Color.WHITE, Color.BLACK);
+    }
+
+    public void setString(Vec2i pos, String string, Color fg) {
+        setString(pos, string, fg, Color.BLACK);
+    }
+
+    public void setString(Vec2i pos, String string, Color fg, Color bg) {
         int x = pos.x;
         int y = pos.y;
 
@@ -140,6 +177,8 @@ public class CellScreen extends Screen {
                 break; // stop if we exceed the screen
             }
             cells[y][x].character = i;
+            cells[y][x].fg = fg;
+            cells[y][x].bg = bg;
             x++;
         }
     }
@@ -155,6 +194,14 @@ public class CellScreen extends Screen {
 
     public void setString(int x, int y, String string) {
         setString(new Vec2i(x, y), string);
+    }
+
+    public void setString(int x, int y, String string, Color fg) {
+        setString(new Vec2i(x, y), string, fg);
+    }
+
+    public void setString(int x, int y, String string, Color fg, Color bg) {
+        setString(new Vec2i(x, y), string, fg, bg);
     }
 
     public int getCols() {
