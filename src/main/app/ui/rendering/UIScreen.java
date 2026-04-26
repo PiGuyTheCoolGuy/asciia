@@ -1,19 +1,16 @@
 package app.ui.rendering;
 
+import app.InputHandler;
 import app.Screen;
 
 public class UIScreen extends Screen {
 
-    public UIScreen(String title, double x, double y, double width, double height) {
-        super(title, x, y, width, height);
+    public UIScreen(String title, double width, double height, InputHandler input) {
+        super(title, width, height, input);
     }
 
-    public UIScreen(String title, double width, double height) {
-        super(title, width, height);
-    }
-
-    public UIScreen(String title) {
-        super(title);
+    public UIScreen(String title, InputHandler input) {
+        super(title, input);
     }
 
     @Override

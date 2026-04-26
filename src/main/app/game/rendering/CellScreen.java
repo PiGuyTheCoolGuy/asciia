@@ -1,6 +1,7 @@
 package app.game.rendering;
 
 import javafx.stage.Stage;
+import app.InputHandler;
 import app.Screen;
 import app.Vec2i;
 import javafx.geometry.Rectangle2D;
@@ -20,24 +21,20 @@ public class CellScreen extends Screen {
                     ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
                     : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
 
-    public CellScreen(String title, double x, double y, double width, double height) {
-        super(title, x, y, width, height);
+    public CellScreen(String title, double width, double height, InputHandler input) {
+        super(title, width, height, input);
         setup();
     }
 
-    public CellScreen(String title, double width, double height) {
-        super(title, width, height);
-        setup();
-    }
-
-    public CellScreen(String title) {
+    public CellScreen(String title, InputHandler input) {
         super(title,
                 (javafx.stage.Screen.getScreens().size() > 1)
                         ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth()
                         : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getWidth(),
                 (javafx.stage.Screen.getScreens().size() > 1)
                         ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
-                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
+                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight(),
+                input);
         setup();
     }
 

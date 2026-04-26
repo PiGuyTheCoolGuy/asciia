@@ -11,27 +11,7 @@ public abstract class Screen {
     private Scene scene;
     protected javafx.scene.canvas.Canvas root;
 
-    public Screen(String title, double x, double y, double width, double height) {
-
-        stage = new Stage();
-        stage.setTitle(title);
-
-        root = new Canvas(width, height);
-        root.setLayoutX(0);
-        root.setLayoutY(0);
-        javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
-        pane.getChildren().add(root);
-        scene = new Scene(pane, width, height);
-
-        stage.setScene(scene);
-
-        stage.setX(x);
-        stage.setY(y);
-
-        stage.show();
-    }
-
-    public Screen(String title, double width, double height) {
+    public Screen(String title, double width, double height, InputHandler input) {
         stage = new Stage();
         stage.setTitle(title);
 
@@ -44,21 +24,13 @@ public abstract class Screen {
 
         stage.setScene(scene);
         stage.show();
+
+        configInput(input);
+
     }
 
-    public Screen(String title) {
-        stage = new Stage();
-        stage.setTitle(title);
-
-        root = new Canvas(800, 600); // Default size
-        root.setLayoutX(0);
-        root.setLayoutY(0);
-        javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
-        pane.getChildren().add(root);
-        scene = new Scene(pane, 800, 600);
-
-        stage.setScene(scene);
-        stage.show();
+    public Screen(String title, InputHandler input) {
+        this(title, 800, 600, input);
     }
 
     public abstract void render();
@@ -86,8 +58,9 @@ public abstract class Screen {
         return stage;
     }
 
-    public void configInput(InputHandler input) {
+    private void configInput(InputHandler input) {
         scene.setOnKeyPressed(e -> input.keyPressed(e.getCode()));
+        scene.setOnKeyReleased(e -> input.keyReleased(e.getCode()));
     }
 
     public void close() {

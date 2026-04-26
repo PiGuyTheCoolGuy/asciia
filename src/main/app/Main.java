@@ -16,12 +16,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        controlPanel = new ControlPanel(() -> running = false);
         // TODO: figure out where the mission package is coming from
-        gameInstance = new GameInstance("Test", false);
-        gameInstance.setOnStop(() -> running = false);
 
-        controlPanel = new ControlPanel();
-        controlPanel.render();
+        gameInstance = new GameInstance("Test", false, () -> running = false);
 
         run();
 
@@ -42,6 +40,7 @@ public class Main extends Application {
                 if (!running) {
                     stop();
                     gameInstance.stop();
+                    controlPanel.stop();
                     Platform.exit();
                 }
 
