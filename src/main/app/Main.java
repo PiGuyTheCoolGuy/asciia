@@ -21,7 +21,8 @@ public class Main extends Application {
         System.out.println("Selected display: " + displayIndex);
 
         // TODO: figure out where the mission package is coming from
-        gameInstance = new GameInstance("Test", false, () -> running = false, displayIndex);
+        gameInstance = new GameInstance("Epic Mission (still in development)", false, () -> running = false,
+                displayIndex);
 
         run();
 

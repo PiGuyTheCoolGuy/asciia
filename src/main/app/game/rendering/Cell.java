@@ -6,14 +6,18 @@ public class Cell {
     public Color fg = Color.WHITE;
     public Color bg = Color.BLACK;
 
-    Cell() {
+    public Cell() {
     }
 
-    Cell(char character) {
+    public Cell(char character) {
         this.character = character;
     }
 
-    Cell(char character, Color fg, Color bg) {
+    public Cell(int character) {
+        this.character = (char) character;
+    }
+
+    public Cell(char character, Color fg, Color bg) {
         this.character = character;
         this.fg = fg;
         this.bg = bg;

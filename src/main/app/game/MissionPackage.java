@@ -2,6 +2,10 @@ package app.game;
 
 import java.util.Vector;
 
+import app.Vec2i;
+import app.game.rendering.Cell;
+import app.game.rendering.CellScreen;
+import app.game.rendering.CharSet;
 import app.game.world.Bot;
 import app.game.world.Entity;
 import app.game.world.Room;
@@ -68,9 +72,43 @@ public class MissionPackage {
         }
     }
 
-    public void render() { // XXX
+    public void render(CellScreen screen) {
+        renderOutline(screen);
         for (WorldObject worldObject : worldObjects)
             worldObject.render();
+
+    }
+
+    private void renderOutline(CellScreen screen) {
+        Vec2i bounds = screen.getSize();
+        String hor = new String(new char[bounds.x - 2]).replace('\0', (char) CharSet.BOX_0101);
+
+        screen.setCell(
+                new Vec2i(0, 0),
+                new Cell(CharSet.BOX_0110));
+        screen.setCell(
+                new Vec2i(bounds.x - 1, 0),
+                new Cell(CharSet.BOX_0011));
+        screen.setCell(
+                new Vec2i(bounds.x - 1, bounds.y - 1),
+                new Cell(CharSet.BOX_1001));
+        screen.setCell(
+                new Vec2i(0, bounds.y - 1),
+                new Cell(CharSet.BOX_1100));
+
+        screen.setString(new Vec2i(1, 0), hor);
+        screen.setString(new Vec2i(1, bounds.y - 1), hor);
+
+        for (int i = 1; i < bounds.y - 1; i++) {
+            screen.setCell(
+                    new Vec2i(0, i),
+                    new Cell(CharSet.BOX_1010));
+            screen.setCell(
+                    new Vec2i(bounds.x - 1, i),
+                    new Cell(CharSet.BOX_1010));
+        }
+
+        screen.setString(new Vec2i(1, 0), name);
 
     }
 

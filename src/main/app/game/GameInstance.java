@@ -33,10 +33,6 @@ public class GameInstance {
         if (input.isKeyPressed(javafx.scene.input.KeyCode.ESCAPE)) {
             requestStop();
         }
-        // if (input.isKeyPressed(javafx.scene.input.KeyCode.TAB)) {
-        // screen.switchFullscreenMonitor();
-        // input.resetAll();
-        // }
 
         missionPackage.update();
     }
@@ -44,7 +40,7 @@ public class GameInstance {
     public void render() {
         screen.clear();
 
-        missionPackage.render();
+        missionPackage.render(screen);
 
         screen.render();
     }

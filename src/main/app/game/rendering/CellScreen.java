@@ -14,12 +14,7 @@ public class CellScreen extends Screen {
 
     private static final Vec2i CELL_SIZE = new Vec2i(16, 16);
 
-    private final Vec2i size = new Vec2i((javafx.stage.Screen.getScreens().size() > 1)
-            ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth()
-            : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getWidth(),
-            (javafx.stage.Screen.getScreens().size() > 1)
-                    ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
-                    : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
+    private Vec2i size;
 
     public CellScreen(String title, InputHandler input, int displayIndex) {
         super(title,
@@ -33,6 +28,9 @@ public class CellScreen extends Screen {
     private void setup(int displayIndex) {
 
         fullScreen(displayIndex);
+
+        size = new Vec2i((int) javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getWidth(),
+                (int) javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getHeight());
 
         cells = new Cell[size.y / CELL_SIZE.y][size.x / CELL_SIZE.x];
         for (int i = 0; i < cells.length; i++) {
@@ -87,6 +85,11 @@ public class CellScreen extends Screen {
 
         stage.setMaximized(true);
         stage.setResizable(false);
+    }
+
+    @Override
+    public Vec2i getSize() {
+        return new Vec2i(size.x / CELL_SIZE.x, size.y / CELL_SIZE.y);
     }
 
     // public void switchFullscreenMonitor() {
