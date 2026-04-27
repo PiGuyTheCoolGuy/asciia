@@ -28,9 +28,6 @@ public class CellScreen extends Screen {
                 input);
         setup(displayIndex);
 
-        container.setStyle("-fx-background-color: black;");
-        stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
-
     }
 
     private void setup(int displayIndex) {
@@ -203,6 +200,12 @@ public class CellScreen extends Screen {
 
     public int getRows() {
         return cells.length;
+    }
+
+    @Override
+    protected void configureWindow() {
+        stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
+        container.setStyle("-fx-background-color: black;");
     }
 
     // TODO: Set up resizing listener to adjust cell grid when window size changes

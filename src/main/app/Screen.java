@@ -24,6 +24,8 @@ public abstract class Screen {
         container.getChildren().add(root);
         scene = new Scene(container, width, height);
 
+        configureWindow();
+
         stage.setScene(scene);
         stage.show();
 
@@ -67,5 +69,9 @@ public abstract class Screen {
 
     public void close() {
         stage.close();
+    }
+
+    protected void configureWindow() {
+
     }
 }
