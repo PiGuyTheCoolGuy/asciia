@@ -17,6 +17,8 @@ public abstract class Screen {
         stage = new Stage();
         stage.setTitle(title);
 
+        stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
+
         root = new Canvas(width, height);
         root.setLayoutX(0);
         root.setLayoutY(0);
