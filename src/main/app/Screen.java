@@ -23,6 +23,7 @@ public abstract class Screen {
         root.setLayoutX(0);
         root.setLayoutY(0);
         container = new javafx.scene.layout.Pane();
+        container.setStyle("-fx-background-color: black;");
         container.getChildren().add(root);
         scene = new Scene(container, width, height);
 
