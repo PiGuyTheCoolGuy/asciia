@@ -27,6 +27,10 @@ public class CellScreen extends Screen {
                 javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getHeight(),
                 input);
         setup(displayIndex);
+
+        container.setStyle("-fx-background-color: black;");
+        stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
+
     }
 
     private void setup(int displayIndex) {
