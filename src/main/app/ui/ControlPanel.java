@@ -41,4 +41,8 @@ public class ControlPanel {
         }
     }
 
+    public int selectGameInstanceDisplay() {
+        return screen.selectGameInstanceDisplay();
+    }
+
 }

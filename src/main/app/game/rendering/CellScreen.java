@@ -21,26 +21,17 @@ public class CellScreen extends Screen {
                     ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
                     : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight());
 
-    public CellScreen(String title, double width, double height, InputHandler input) {
-        super(title, width, height, input);
-        setup();
-    }
-
-    public CellScreen(String title, InputHandler input) {
+    public CellScreen(String title, InputHandler input, int displayIndex) {
         super(title,
-                (javafx.stage.Screen.getScreens().size() > 1)
-                        ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getWidth()
-                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getWidth(),
-                (javafx.stage.Screen.getScreens().size() > 1)
-                        ? (int) javafx.stage.Screen.getScreens().get(1).getBounds().getHeight()
-                        : (int) javafx.stage.Screen.getScreens().get(0).getBounds().getHeight(),
+                javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getWidth(),
+                javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getHeight(),
                 input);
-        setup();
+        setup(displayIndex);
     }
 
-    private void setup() {
+    private void setup(int displayIndex) {
 
-        fullscreenOnSecondaryMonitor();
+        fullScreen(displayIndex);
 
         cells = new Cell[size.y / CELL_SIZE.y][size.x / CELL_SIZE.x];
         for (int i = 0; i < cells.length; i++) {
@@ -77,55 +68,51 @@ public class CellScreen extends Screen {
         stage.show();
     }
 
-    private void fullscreenOnSecondaryMonitor() {
+    private void fullScreen(int displayIndex) {
 
-        var screens = javafx.stage.Screen.getScreens();
         Stage stage = getStage();
         stage.setFullScreenExitHint("");
 
-        if (screens.size() > 1) {
-            javafx.stage.Screen tv = screens.get(1);
-            Rectangle2D bounds = tv.getVisualBounds();
+        javafx.stage.Screen tv = javafx.stage.Screen.getScreens().get(displayIndex);
+        Rectangle2D bounds = tv.getVisualBounds();
 
-            stage.setX(bounds.getMinX());
-            stage.setY(bounds.getMinY());
-            stage.setWidth(bounds.getWidth());
-            stage.setHeight(bounds.getHeight());
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+        stage.setWidth(bounds.getWidth());
+        stage.setHeight(bounds.getHeight());
 
-            stage.setFullScreen(true);
-        } else {
-            stage.setFullScreen(true); // fallback
-        }
+        stage.setFullScreen(true);
     }
 
-    public void switchFullscreenMonitor() {
-        var screens = javafx.stage.Screen.getScreens();
-        Stage stage = getStage();
+    // public void switchFullscreenMonitor() {
+    // var screens = javafx.stage.Screen.getScreens();
+    // Stage stage = getStage();
 
-        if (screens.size() > 1) {
-            javafx.stage.Screen currentScreen = null;
-            for (javafx.stage.Screen s : screens) {
-                if (s.getBounds().contains(stage.getX(), stage.getY())) {
-                    currentScreen = s;
-                    break;
-                }
-            }
+    // if (screens.size() > 1) {
+    // javafx.stage.Screen currentScreen = null;
+    // for (javafx.stage.Screen s : screens) {
+    // if (s.getBounds().contains(stage.getX(), stage.getY())) {
+    // currentScreen = s;
+    // break;
+    // }
+    // }
 
-            if (currentScreen != null) {
-                javafx.stage.Screen targetScreen = (currentScreen == screens.get(0)) ? screens.get(1) : screens.get(0);
-                Rectangle2D bounds = targetScreen.getVisualBounds();
+    // if (currentScreen != null) {
+    // javafx.stage.Screen targetScreen = (currentScreen == screens.get(0)) ?
+    // screens.get(1) : screens.get(0);
+    // Rectangle2D bounds = targetScreen.getVisualBounds();
 
-                stage.setX(bounds.getMinX());
-                stage.setY(bounds.getMinY());
-                stage.setWidth(bounds.getWidth());
-                stage.setHeight(bounds.getHeight());
+    // stage.setX(bounds.getMinX());
+    // stage.setY(bounds.getMinY());
+    // stage.setWidth(bounds.getWidth());
+    // stage.setHeight(bounds.getHeight());
 
-                stage.setFullScreen(true);
-            }
-        } else {
-            stage.setFullScreen(true); // fallback
-        }
-    }
+    // stage.setFullScreen(true);
+    // }
+    // } else {
+    // stage.setFullScreen(true); // fallback
+    // }
+    // }
 
     public void clear() {
         for (Cell[] row : cells) {
@@ -209,5 +196,7 @@ public class CellScreen extends Screen {
     public int getRows() {
         return cells.length;
     }
+
+    // TODO: Set up resizing listener to adjust cell grid when window size changes
 
 }

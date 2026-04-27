@@ -18,12 +18,12 @@ public class GameInstance {
      * If fromFile is true, missionPackageName is treated as a file path. Otherwise,
      * it's treated as a resource name.Q
      */
-    public GameInstance(String missionPackageName, boolean fromFile, Runnable onStop) {
+    public GameInstance(String missionPackageName, boolean fromFile, Runnable onStop, int displayIndex) {
         missionPackage = new MissionPackage(missionPackageName, fromFile);
 
         this.missionPackageName = missionPackage.getName();
 
-        screen = new CellScreen("Asciia - " + this.missionPackageName, input);
+        screen = new CellScreen("Asciia - " + this.missionPackageName, input, displayIndex);
 
         this.onStop = onStop;
 
@@ -33,10 +33,10 @@ public class GameInstance {
         if (input.isKeyPressed(javafx.scene.input.KeyCode.ESCAPE)) {
             requestStop();
         }
-        if (input.isKeyPressed(javafx.scene.input.KeyCode.TAB)) {
-            screen.switchFullscreenMonitor();
-            input.resetAll();
-        }
+        // if (input.isKeyPressed(javafx.scene.input.KeyCode.TAB)) {
+        // screen.switchFullscreenMonitor();
+        // input.resetAll();
+        // }
 
         missionPackage.update();
     }

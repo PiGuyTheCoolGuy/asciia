@@ -9,7 +9,9 @@ public abstract class Screen {
 
     protected Stage stage;
     private Scene scene;
-    protected javafx.scene.canvas.Canvas root;
+    protected Canvas root;
+
+    protected javafx.scene.layout.Pane container;
 
     public Screen(String title, double width, double height, InputHandler input) {
         stage = new Stage();
@@ -18,9 +20,9 @@ public abstract class Screen {
         root = new Canvas(width, height);
         root.setLayoutX(0);
         root.setLayoutY(0);
-        javafx.scene.layout.Pane pane = new javafx.scene.layout.Pane();
-        pane.getChildren().add(root);
-        scene = new Scene(pane, width, height);
+        container = new javafx.scene.layout.Pane();
+        container.getChildren().add(root);
+        scene = new Scene(container, width, height);
 
         stage.setScene(scene);
         stage.show();

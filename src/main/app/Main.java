@@ -17,9 +17,11 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) {
         controlPanel = new ControlPanel(() -> running = false);
-        // TODO: figure out where the mission package is coming from
+        int displayIndex = controlPanel.selectGameInstanceDisplay();
+        System.out.println("Selected display: " + displayIndex);
 
-        gameInstance = new GameInstance("Test", false, () -> running = false);
+        // TODO: figure out where the mission package is coming from
+        gameInstance = new GameInstance("Test", false, () -> running = false, displayIndex);
 
         run();
 

@@ -1,10 +1,5 @@
 package app.game.rendering;
 
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
-import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -22,18 +17,6 @@ public class GlyphCache {
         this.font = font;
         cache = new Image[font
                 .getLength()][Color.values().length][Color.values().length];
-
-        // test one glyph and save it to file
-        Image testGlyph = generateGlyph('A', Color.GREEN, Color.BLUE);
-        // save to file
-        try {
-            ImageIO.write(SwingFXUtils.fromFXImage(testGlyph, null), "png", new java.io.File("test_glyph.png"));
-            System.out.println("Test glyph saved to test_glyph.png");
-        } catch (IOException e) {
-            System.out.println("no");
-            e.printStackTrace();
-        }
-        // generateCache();
     }
 
     public Image getGlyph(char c, Color fg, Color bg) {
