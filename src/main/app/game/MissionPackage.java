@@ -73,10 +73,10 @@ public class MissionPackage {
     }
 
     public void render(CellScreen screen) {
-        renderOutline(screen);
         for (WorldObject worldObject : worldObjects)
             worldObject.render();
 
+        renderOutline(screen);
     }
 
     private void renderOutline(CellScreen screen) {
