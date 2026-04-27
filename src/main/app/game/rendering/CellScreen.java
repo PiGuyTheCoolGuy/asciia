@@ -74,14 +74,18 @@ public class CellScreen extends Screen {
         stage.setFullScreenExitHint("");
 
         javafx.stage.Screen tv = javafx.stage.Screen.getScreens().get(displayIndex);
-        Rectangle2D bounds = tv.getVisualBounds();
+        // Rectangle2D bounds = tv.getVisualBounds();
+        Rectangle2D bounds = tv.getBounds();
+
+        stage.setFullScreen(false);
 
         stage.setX(bounds.getMinX());
         stage.setY(bounds.getMinY());
         stage.setWidth(bounds.getWidth());
         stage.setHeight(bounds.getHeight());
 
-        stage.setFullScreen(true);
+        stage.setMaximized(true);
+        stage.setResizable(false);
     }
 
     // public void switchFullscreenMonitor() {
