@@ -4,12 +4,17 @@ import java.util.List;
 
 import app.InputHandler;
 import app.Screen;
+import app.Vec2i;
+import app.command.MoveCameraCommand;
+import app.ui.ControlPanel;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Scene;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.ImageView;
@@ -22,19 +27,71 @@ import javafx.stage.Stage;
 
 public class UIScreen extends Screen {
 
-    // public UIScreen(String title, double width, double height, InputHandler
-    // input) {
-    // super(title, width, height, input);
-    // }
+    private Label cameraLabel;
+    private VBox cameraPanel;
+    private TextField cameraXField;
+    private TextField cameraYField;
 
-    public UIScreen(String title, InputHandler input) {
+    private ControlPanel controlPanel;
+
+    public UIScreen(String title, InputHandler input, ControlPanel controlPanel) {
         super(title, input);
+        this.controlPanel = controlPanel;
 
-        Button button = new Button("Test");
-        button.setOnAction(null);
-        button.setLayoutX(50);
-        button.setLayoutY(50);
-        container.getChildren().add(button);
+        //
+
+        cameraPanel = new VBox(5);
+        cameraPanel.setStyle(
+                "-fx-border-color: lime;" +
+                        "-fx-border-width: 1;" +
+                        "-fx-padding: 8;" +
+                        "-fx-background-color: black;");
+
+        // --- Label (live camera position)
+        cameraLabel = new Label("Camera: (0, 0)");
+        cameraLabel.setStyle("-fx-text-fill: white; -fx-font-family: monospace;");
+
+        // --- Input fields
+        cameraXField = new TextField();
+        cameraXField.setPromptText("X");
+
+        cameraYField = new TextField();
+        cameraYField.setPromptText("Y");
+
+        // Optional: make them smaller
+        cameraXField.setPrefWidth(60);
+        cameraYField.setPrefWidth(60);
+
+        // Put inputs side-by-side
+        HBox inputRow = new HBox(5, cameraXField, cameraYField);
+
+        // --- Submit button
+        Button submit = new Button("Set Camera");
+
+        submit.setOnAction(e -> {
+            /*
+             * try {
+             * int x = Integer.parseInt(cameraXField.getText());
+             * int y = Integer.parseInt(cameraYField.getText());
+             * 
+             * controlPanel.setCamera(new Vec2i(x, y)); // adjust to your API
+             * } catch (NumberFormatException ex) {
+             * System.out.println("Invalid camera input");
+             * }
+             */
+
+            int x = Integer.parseInt(cameraXField.getText());
+            int y = Integer.parseInt(cameraYField.getText());
+
+            controlPanel.enqueueCommand(new MoveCameraCommand(controlPanel.getCamera(), new Vec2i(x, y), 1.5));
+
+        });
+
+        // --- Assemble panel
+        cameraPanel.getChildren().addAll(cameraLabel, inputRow, submit);
+
+        // Add to your existing container
+        container.getChildren().add(cameraPanel);
 
     }
 
@@ -126,7 +183,10 @@ public class UIScreen extends Screen {
     public void render() {
         GraphicsContext gc = gc();
         gc.clearRect(0, 0, getSize().x, getSize().y);
-        // Render UI elements here
+
+        Vec2i cam = controlPanel.getCamera();
+
+        cameraLabel.setText("Camera: (" + cam.x + ", " + cam.y + ")");
 
     }
 

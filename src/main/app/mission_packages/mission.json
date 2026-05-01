@@ -1,0 +1,10 @@
+{
+  "name": "Test Mission",
+  "description": "A simple test mission.",
+  "worldObjects": [
+    {
+      "type": "Rover",
+      "position": { "x": 5, "y": 5 }
+    }
+  ]
+}

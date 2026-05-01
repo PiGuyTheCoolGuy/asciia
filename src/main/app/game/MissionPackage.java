@@ -13,6 +13,8 @@ import app.game.world.Rover;
 import app.game.world.Structure;
 import app.game.world.WorldObject;
 
+// import com.google.gson.Gson;
+
 /**
  * - A mission package is the Asciia equivalent of a campaign.
  * - It is played by ground control (the players in real life) talking to a
@@ -41,40 +43,47 @@ public class MissionPackage {
     private Vector<WorldObject> worldObjects;
 
     public MissionPackage(String name, boolean fromFile) {
+        worldObjects = new Vector<WorldObject>();
+
         if (fromFile) {
             loadFromFile(name);
         } else {
             this.name = name;
         }
-        worldObjects = new Vector<>();
     }
 
     private void loadFromFile(String fileName) {
         // TODO: Implement loading `MissionPackage` from file
         name = "IMPLEMENT FILE STUFF!!";
+
+        // XXX
+        worldObjects.add(new Rover());
     }
 
     public void addWorldObject(WorldObject worldObject) {
         worldObjects.add(worldObject);
     }
 
-    public void update() {
+    public void update(double deltatime) {
         for (WorldObject worldObject : worldObjects) {
             if (worldObject instanceof Entity) {
                 if (worldObject instanceof Rover)
-                    ((Rover) worldObject).update();
+                    ((Rover) worldObject).update(deltatime);
                 else if (worldObject instanceof Bot)
-                    ((Bot) worldObject).update();
+                    ((Bot) worldObject).update(deltatime);
             } else if (worldObject instanceof Structure) {
                 if (worldObject instanceof Room)
-                    ((Room) worldObject).update();
+                    ((Room) worldObject).update(deltatime);
             }
         }
     }
 
-    public void render(CellScreen screen) {
-        for (WorldObject worldObject : worldObjects)
-            worldObject.render();
+    public void render(CellScreen screen, Vec2i camera, Vec2i screenCenter) {
+        for (WorldObject worldObject : worldObjects) {
+            // TODO: Complete
+            Vec2i pos = worldObject.getPosition().subtract(camera).add(screenCenter);
+            worldObject.getTexture().render(screen, pos);
+        }
 
         renderOutline(screen);
     }

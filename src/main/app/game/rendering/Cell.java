@@ -29,4 +29,8 @@ public class Cell {
         bg = Color.BLACK;
     }
 
+    public Cell copy() {
+        return new Cell(character, fg, bg);
+    }
+
 }

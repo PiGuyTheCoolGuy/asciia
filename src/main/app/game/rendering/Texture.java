@@ -14,11 +14,8 @@ public class Texture {
         }
     }
 
-    public Cell getCell(int x, int y) {
-        if (y < 0 || y >= cells.length || x < 0 || x >= cells[y].length) {
-            throw new IndexOutOfBoundsException("Cell coordinates out of bounds: (" + x + ", " + y + ")");
-        }
-        return cells[y][x];
+    public Texture(Cell[][] cells) {
+        this.cells = cells;
     }
 
     public Texture(String filename) { // TODO: Handle exceptions properly
@@ -54,6 +51,13 @@ public class Texture {
         }
     }
 
+    public Cell getCell(int x, int y) {
+        if (y < 0 || y >= cells.length || x < 0 || x >= cells[y].length) {
+            throw new IndexOutOfBoundsException("Cell coordinates out of bounds: (" + x + ", " + y + ")");
+        }
+        return cells[y][x];
+    }
+
     public int getCols() {
         return cells[0].length;
     }
@@ -64,5 +68,13 @@ public class Texture {
 
     public Cell getCell(Vec2i pos) {
         return getCell(pos.x, pos.y);
+    }
+
+    public void render(CellScreen screen, Vec2i pos) {
+        for (int y = 0; y < cells.length; y++) {
+            for (int x = 0; x < cells[y].length; x++) {
+                screen.setCell(pos.add(new Vec2i(x, y)), cells[y][x].copy());
+            }
+        }
     }
 }
