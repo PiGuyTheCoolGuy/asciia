@@ -1,6 +1,5 @@
 package app.game.rendering;
 
-import javafx.stage.Stage;
 import app.InputHandler;
 import app.Screen;
 import app.Vec2i;
@@ -23,11 +22,13 @@ public class CellScreen extends Screen {
                 input);
         setup(displayIndex);
 
+        // stage.show();
+        // stage.toFront();
+        // stage.requestFocus();
+
     }
 
     private void setup(int displayIndex) {
-
-        fullScreen(displayIndex);
 
         size = new Vec2i((int) javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getWidth(),
                 (int) javafx.stage.Screen.getScreens().get(displayIndex).getBounds().getHeight());
@@ -39,9 +40,7 @@ public class CellScreen extends Screen {
             }
         }
 
-        System.out.println("Initialized cell grid: " + cells.length + " rows x " + cells[0].length + " cols");
-        System.out.println("Cell size: " + CELL_SIZE.x + "x" + CELL_SIZE.y);
-        System.out.println("Screen size: " + size.x + "x" + size.y);
+        System.out.println("Screen cell amount" + cells.length + "x" + cells[0].length);
 
         // try to load font
         try {
@@ -55,72 +54,62 @@ public class CellScreen extends Screen {
             System.err.println("Failed to load font: " + e.getMessage());
             e.printStackTrace();
         }
+
+        fullScreen(displayIndex);
+        configureWindow();
+
     }
 
     @Override
     public void render() {
+
         int rows = size.y / CELL_SIZE.y;
         int cols = size.x / CELL_SIZE.x;
 
         terminal.render(cols, rows);
+        // stage.show();
 
-        stage.show();
     }
 
-    private void fullScreen(int displayIndex) {
+    // private void fullScreen(int displayIndex) {
 
-        Stage stage = getStage();
-        stage.setFullScreenExitHint("");
-
-        javafx.stage.Screen tv = javafx.stage.Screen.getScreens().get(displayIndex);
-        // Rectangle2D bounds = tv.getVisualBounds();
-        Rectangle2D bounds = tv.getBounds();
-
-        stage.setFullScreen(false);
-
-        stage.setX(bounds.getMinX());
-        stage.setY(bounds.getMinY());
-        stage.setWidth(bounds.getWidth());
-        stage.setHeight(bounds.getHeight());
-
-        stage.setMaximized(true);
-        stage.setResizable(false);
-    }
-
-    @Override
-    public Vec2i getSize() {
-        return new Vec2i(size.x / CELL_SIZE.x, size.y / CELL_SIZE.y);
-    }
-
-    // public void switchFullscreenMonitor() {
-    // var screens = javafx.stage.Screen.getScreens();
     // Stage stage = getStage();
+    // stage.setFullScreenExitHint("");
 
-    // if (screens.size() > 1) {
-    // javafx.stage.Screen currentScreen = null;
-    // for (javafx.stage.Screen s : screens) {
-    // if (s.getBounds().contains(stage.getX(), stage.getY())) {
-    // currentScreen = s;
-    // break;
-    // }
-    // }
+    // javafx.stage.Screen tv = javafx.stage.Screen.getScreens().get(displayIndex);
+    // // Rectangle2D bounds = tv.getVisualBounds();
+    // Rectangle2D bounds = tv.getBounds();
 
-    // if (currentScreen != null) {
-    // javafx.stage.Screen targetScreen = (currentScreen == screens.get(0)) ?
-    // screens.get(1) : screens.get(0);
-    // Rectangle2D bounds = targetScreen.getVisualBounds();
+    // stage.setFullScreen(false);
 
     // stage.setX(bounds.getMinX());
     // stage.setY(bounds.getMinY());
     // stage.setWidth(bounds.getWidth());
     // stage.setHeight(bounds.getHeight());
 
-    // stage.setFullScreen(true);
+    // stage.setMaximized(true);
+    // stage.setResizable(false);
     // }
-    // } else {
-    // stage.setFullScreen(true); // fallback
-    // }
-    // }
+
+    private void fullScreen(int displayIndex) {
+
+        stage.setFullScreenExitHint("");
+
+        javafx.stage.Screen tv = javafx.stage.Screen.getScreens().get(displayIndex);
+        Rectangle2D bounds = tv.getBounds();
+
+        stage.setX(bounds.getMinX());
+        stage.setY(bounds.getMinY());
+
+        stage.setMaximized(true);
+        stage.setResizable(false);
+        // stage.setFullScreen(true);
+    }
+
+    @Override
+    public Vec2i getSize() {
+        return new Vec2i(size.x / CELL_SIZE.x, size.y / CELL_SIZE.y);
+    }
 
     public void clear() {
         for (Cell[] row : cells) {
@@ -205,12 +194,16 @@ public class CellScreen extends Screen {
         return cells.length;
     }
 
-    @Override
+    // @Override
     protected void configureWindow() {
         stage.initStyle(javafx.stage.StageStyle.UNDECORATED);
         container.setStyle("-fx-background-color: black;");
     }
 
-    // TODO: Set up resizing listener to adjust cell grid when window size changes
+    public void show() {
+        stage.show();
+        stage.toFront();
+        stage.requestFocus();
+    }
 
 }

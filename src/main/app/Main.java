@@ -18,13 +18,14 @@ public class Main extends Application {
     public void start(Stage primaryStage) {
         controlPanel = new ControlPanel(() -> running = false, gameInstance);
         int displayIndex = controlPanel.selectGameInstanceDisplay();
-        System.out.println("Selected display: " + displayIndex);
 
         // TODO: figure out where the mission package is coming from
         gameInstance = new GameInstance("mission.json", true, () -> running = false,
                 displayIndex, controlPanel);
 
         controlPanel.setGameInstance(gameInstance);
+
+        gameInstance.show();
 
         run();
 

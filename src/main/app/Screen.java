@@ -24,10 +24,10 @@ public abstract class Screen {
         container.getChildren().add(root);
         scene = new Scene(container, width, height);
 
-        configureWindow();
+        // configureWindow();
 
         stage.setScene(scene);
-        stage.show();
+        // stage.show();
 
         configInput(input);
 
@@ -71,7 +71,7 @@ public abstract class Screen {
         stage.close();
     }
 
-    protected void configureWindow() {
+    // protected void configureWindow() {
 
-    }
+    // }
 }

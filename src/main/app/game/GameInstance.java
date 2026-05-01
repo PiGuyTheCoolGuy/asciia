@@ -72,6 +72,10 @@ public class GameInstance {
         screen.render();
     }
 
+    public void show() {
+        screen.show();
+    }
+
     public void stop() {
         // Close window
         screen.close();

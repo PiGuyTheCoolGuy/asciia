@@ -38,7 +38,7 @@ public class UIScreen extends Screen {
         super(title, input);
         this.controlPanel = controlPanel;
 
-        //
+        container.setStyle("-fx-background-color: black;");
 
         cameraPanel = new VBox(5);
         cameraPanel.setStyle(
@@ -92,6 +92,9 @@ public class UIScreen extends Screen {
 
         // Add to your existing container
         container.getChildren().add(cameraPanel);
+
+        // And finally...
+        stage.show();
 
     }
 
