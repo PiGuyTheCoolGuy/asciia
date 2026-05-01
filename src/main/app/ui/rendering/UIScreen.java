@@ -58,6 +58,18 @@ public class UIScreen extends Screen {
         cameraYField = new TextField();
         cameraYField.setPromptText("Y");
 
+        // make numeric only
+        cameraXField.textProperty().addListener((obs, oldText, newText) -> {
+            if (!newText.matches("-?\\d*")) {
+                cameraXField.setText(oldText);
+            }
+        });
+        cameraYField.textProperty().addListener((obs, oldText, newText) -> {
+            if (!newText.matches("-?\\d*")) {
+                cameraYField.setText(oldText);
+            }
+        });
+
         // Optional: make them smaller
         cameraXField.setPrefWidth(60);
         cameraYField.setPrefWidth(60);
