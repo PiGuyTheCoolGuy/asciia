@@ -1,36 +1,26 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
-set -e
+echo "Compiling Java..."
 
-# ---- Config ----
-SRC_DIR="src/main"
-OUT_DIR="out"
-MAIN_CLASS="app.Main"
+GSON_JAR="lib/gson-2.9.1.jar"
 
-# Build classpath (all jars in lib and javafx)
-CLASSPATH=$(find lib -name "*.jar" | tr '\n' ':')
+mkdir -p out
 
-# JavaFX specific
-JAVAFX_LIB="lib/javafx/lib"
+javac -d out \
+--module-path /usr/share/openjfx/lib \
+--add-modules javafx.controls,javafx.fxml \
+-cp "$GSON_JAR" \
+$(find src -name "*.java")
 
-# Clean output
-echo "Cleaning output directory..."
-rm -rf "$OUT_DIR"
-mkdir -p "$OUT_DIR"
+echo "Copying assets..."
 
-# Compile
-echo "Compiling..."
-javac \
-  --module-path "$JAVAFX_LIB" \
-  --add-modules javafx.controls,javafx.fxml \
-  -cp "$CLASSPATH" \
-  -d "$OUT_DIR" \
-  $(find "$SRC_DIR" -name "*.java")
+cp -r src/main/app out/
 
-# Run
 echo "Running..."
-java \
-  --module-path "$JAVAFX_LIB" \
-  --add-modules javafx.controls,javafx.fxml \
-  -cp "$OUT_DIR:$CLASSPATH" \
-  "$MAIN_CLASS"
+
+export DISPLAY=:0
+
+java -cp "out:$GSON_JAR" \
+--module-path /usr/share/openjfx/lib \
+--add-modules javafx.controls,javafx.fxml \
+app.Main
