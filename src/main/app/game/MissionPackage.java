@@ -1,6 +1,12 @@
 package app.game;
 
-import java.util.Vector;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
 
 import app.Vec2i;
 import app.game.rendering.Cell;
@@ -8,10 +14,12 @@ import app.game.rendering.CellScreen;
 import app.game.rendering.CharSet;
 import app.game.world.Bot;
 import app.game.world.Entity;
+import app.game.world.RawMissionPackage;
 import app.game.world.Room;
 import app.game.world.Rover;
 import app.game.world.Structure;
 import app.game.world.WorldObject;
+import app.game.world.RawWorldObject;
 
 // import com.google.gson.Gson;
 
@@ -38,26 +46,52 @@ import app.game.world.WorldObject;
  * to repair the ship and return home.
  */
 public class MissionPackage {
-    private String name;
+    private String name = "Mission";
 
-    private Vector<WorldObject> worldObjects;
+    private String description = "A mission.";
 
-    public MissionPackage(String name, boolean fromFile) {
-        worldObjects = new Vector<WorldObject>();
+    private List<WorldObject> worldObjects;
 
-        if (fromFile) {
-            loadFromFile(name);
-        } else {
-            this.name = name;
+    public MissionPackage(String name) {
+        worldObjects = new ArrayList<WorldObject>();
+
+        // loadFromFile("mission_packages/" + name);
+        try {
+            loadFromFile("C:\\Users\\treic\\asciia\\src\\main\\app\\mission_packages\\mission.json");
+        } catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
+            e.printStackTrace();
         }
     }
 
-    private void loadFromFile(String fileName) {
+    private void loadFromFile(String fileName) throws JsonSyntaxException, JsonIOException, FileNotFoundException {
         // TODO: Implement loading `MissionPackage` from file
-        name = "IMPLEMENT FILE STUFF!!";
+        Gson gson = new Gson();
+
+        // TODO: make this work correctly
+        RawMissionPackage rawMissionPackage = gson.fromJson(new FileReader(fileName), RawMissionPackage.class);
+
+        this.name = rawMissionPackage.name;
+        this.description = rawMissionPackage.description;
+
+        for (RawWorldObject r : rawMissionPackage.worldObjects) {
+            switch (r.type) {
+
+                case "rover":
+                    Rover rover = new Rover(r.position);
+                    this.addWorldObject(rover);
+                    break;
+
+                case "room":
+                    Room room = new Room(r.position, r.size, r.doors);
+                    this.addWorldObject(room);
+                    break;
+                default:
+                    break;
+            }
+        }
 
         // XXX
-        worldObjects.add(new Rover());
+        // worldObjects.add(new Rover());
     }
 
     public void addWorldObject(WorldObject worldObject) {
@@ -82,7 +116,7 @@ public class MissionPackage {
         for (WorldObject worldObject : worldObjects) {
             // TODO: Complete
             Vec2i pos = worldObject.getPosition().subtract(camera).add(screenCenter);
-            worldObject.getTexture().render(screen, pos);
+            worldObject.render().render(screen, pos);
         }
 
         renderOutline(screen);

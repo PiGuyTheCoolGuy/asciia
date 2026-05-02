@@ -20,7 +20,7 @@ public class Main extends Application {
         int displayIndex = controlPanel.selectGameInstanceDisplay();
 
         // TODO: figure out where the mission package is coming from
-        gameInstance = new GameInstance("mission.json", true, () -> running = false,
+        gameInstance = new GameInstance("mission.json", () -> running = false,
                 displayIndex, controlPanel);
 
         controlPanel.setGameInstance(gameInstance);

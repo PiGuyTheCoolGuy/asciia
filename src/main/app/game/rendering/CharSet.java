@@ -51,7 +51,7 @@ public class CharSet {
     public static final int ARROWS_HORIZONTAL = 0x1D;
     public static final int TRIANGLE_UP = 0x1E;
     public static final int TRIANGLE_DOWN = 0x1F;
-    public static final int SPACE_2 = 0x20;
+    public static final int BOX_0000 = 0x20;
     public static final int EXCLAMATION_SINGLE = 0x21;
     public static final int QUOTE_DOUBLE = 0x22;
     public static final int POUND = 0x23;

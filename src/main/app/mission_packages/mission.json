@@ -3,8 +3,18 @@
   "description": "A simple test mission.",
   "worldObjects": [
     {
-      "type": "Rover",
+      "type": "rover",
       "position": { "x": 5, "y": 5 }
+    },
+    {
+      "type": "room",
+      "position": { "x": -43, "y": -18 },
+      "size": { "x": 25, "y": 31 },
+      "doors": [
+        { "x": 24, "y": 14 },
+        { "x": 24, "y": 15 },
+        { "x": 24, "y": 16 }
+      ]
     }
   ]
 }

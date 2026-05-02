@@ -14,6 +14,11 @@ public class Texture {
         }
     }
 
+    public Texture(int character) {
+        cells = new Cell[1][1];
+        cells[0][0] = new Cell(character);
+    }
+
     public Texture(Cell[][] cells) {
         this.cells = cells;
     }
@@ -73,7 +78,7 @@ public class Texture {
     public void render(CellScreen screen, Vec2i pos) {
         for (int y = 0; y < cells.length; y++) {
             for (int x = 0; x < cells[y].length; x++) {
-                screen.setCell(pos.add(new Vec2i(x, y)), cells[y][x].copy());
+                screen.setCell(pos.add(new Vec2i(y, x)), cells[y][x].copy());
             }
         }
     }

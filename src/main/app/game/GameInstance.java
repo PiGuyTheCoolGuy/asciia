@@ -31,9 +31,9 @@ public class GameInstance {
      * If fromFile is true, missionPackageName is treated as a file path. Otherwise,
      * it's treated as a resource name.
      */
-    public GameInstance(String missionPackageName, boolean fromFile, Runnable onStop, int displayIndex,
+    public GameInstance(String missionPackageName, Runnable onStop, int displayIndex,
             ControlPanel controlPanel) {
-        missionPackage = new MissionPackage(missionPackageName, fromFile);
+        missionPackage = new MissionPackage(missionPackageName);
 
         this.missionPackageName = missionPackage.getName();
 
