@@ -1,7 +1,9 @@
 package app.game;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 import com.google.gson.Gson;
@@ -56,8 +58,7 @@ public class MissionPackage {
         worldObjects = new ArrayList<WorldObject>();
 
         try {
-            // loadFromFile("C:\\Users\\treic\\asciia\\src\\main\\app\\mission_packages\\mission.json");
-            loadFromFile("/app/mission_packages/" + name);
+            loadFromFile("/app/mission_packages/mission.json");
         } catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -66,11 +67,17 @@ public class MissionPackage {
     }
 
     private void loadFromFile(String fileName) throws JsonSyntaxException, JsonIOException, FileNotFoundException {
-        // TODO: Implement loading `MissionPackage` from file
         Gson gson = new Gson();
 
-        // TODO: make this work correctly
-        RawMissionPackage rawMissionPackage = gson.fromJson(new FileReader(fileName), RawMissionPackage.class);
+        InputStream is = getClass().getResourceAsStream(fileName);
+
+        if (is == null) {
+            throw new FileNotFoundException("Mission package file not found: " + fileName);
+        }
+
+        Reader reader = new InputStreamReader(is);
+
+        RawMissionPackage rawMissionPackage = gson.fromJson(reader, RawMissionPackage.class);
 
         this.name = rawMissionPackage.name;
         this.description = rawMissionPackage.description;
