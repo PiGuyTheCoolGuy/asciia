@@ -61,6 +61,8 @@ public class MissionPackage {
         } catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
             e.printStackTrace();
         }
+
+        System.out.println("Loaded mission package: " + this.name + ". Description: " + this.description);
     }
 
     private void loadFromFile(String fileName) throws JsonSyntaxException, JsonIOException, FileNotFoundException {
