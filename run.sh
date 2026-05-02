@@ -1,31 +1,36 @@
 #!/usr/bin/env bash
 
-# === CONFIG ===
-SRC_DIR="src"
+set -e
+
+# ---- Config ----
+SRC_DIR="src/main"
 OUT_DIR="out"
 MAIN_CLASS="app.Main"
 
-# === BUILD CLASSPATH ===
-# Collect all jars from javafx/lib and lib
-CP=$(find javafx/lib lib -name "*.jar" | tr '\n' ':')
+# Build classpath (all jars in lib and javafx)
+CLASSPATH=$(find lib -name "*.jar" | tr '\n' ':')
 
-# Create output directory
+# JavaFX specific
+JAVAFX_LIB="lib/javafx/lib"
+
+# Clean output
+echo "Cleaning output directory..."
+rm -rf "$OUT_DIR"
 mkdir -p "$OUT_DIR"
 
+# Compile
 echo "Compiling..."
-
 javac \
-  --class-path "$CP" \
+  --module-path "$JAVAFX_LIB" \
+  --add-modules javafx.controls,javafx.fxml \
+  -cp "$CLASSPATH" \
   -d "$OUT_DIR" \
   $(find "$SRC_DIR" -name "*.java")
 
-if [ $? -ne 0 ]; then
-  echo "Compilation failed"
-  exit 1
-fi
-
+# Run
 echo "Running..."
-
 java \
-  --class-path "$OUT_DIR:$CP" \
+  --module-path "$JAVAFX_LIB" \
+  --add-modules javafx.controls,javafx.fxml \
+  -cp "$OUT_DIR:$CLASSPATH" \
   "$MAIN_CLASS"
