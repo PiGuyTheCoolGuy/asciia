@@ -55,9 +55,9 @@ public class MissionPackage {
     public MissionPackage(String name) {
         worldObjects = new ArrayList<WorldObject>();
 
-        // loadFromFile("mission_packages/" + name);
         try {
-            loadFromFile("C:\\Users\\treic\\asciia\\src\\main\\app\\mission_packages\\mission.json");
+            // loadFromFile("C:\\Users\\treic\\asciia\\src\\main\\app\\mission_packages\\mission.json");
+            loadFromFile("/app/mission_packages/" + name);
         } catch (JsonSyntaxException | JsonIOException | FileNotFoundException e) {
             e.printStackTrace();
         }
