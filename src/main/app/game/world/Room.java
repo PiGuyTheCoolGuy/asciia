@@ -5,12 +5,23 @@ import app.game.rendering.Cell;
 import app.game.rendering.CharSet;
 import app.game.rendering.Texture;
 
+/**
+ * Represents a room in the game world. A room is a type of structure with a
+ * specific size and doors.
+ */
 public class Room extends Structure {
 
     private Vec2i size;
 
     private Vec2i[] doors;
 
+    /**
+     * Create a new room with the given position, size, and doors.
+     * 
+     * @param position The position of the room in the game world.
+     * @param size     The size of the room.
+     * @param doors    The positions of the doors in the room.
+     */
     public Room(Vec2i position, Vec2i size, Vec2i[] doors) {
         super();
         this.position = position;
@@ -20,6 +31,9 @@ public class Room extends Structure {
         buildTexture();
     }
 
+    /**
+     * Build the texture for the room based on its size and doors.
+     */
     private void buildTexture() {
         Cell[][] cells = new Cell[size.x][size.y];
 
@@ -51,9 +65,20 @@ public class Room extends Structure {
         this.texture = new Texture(cells);
     }
 
+    /**
+     * Update the room's state. This is where the room will decide what to do,
+     * and update its state accordingly.
+     * 
+     * @param deltatime The time since the last update, in seconds.
+     */
     public void update(double deltatime) { // XXX
     }
 
+    /**
+     * Render the room's texture.
+     * 
+     * @return The texture of the room.
+     */
     public Texture render() { // XXX
         return texture;
     }

@@ -5,20 +5,39 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.image.WritableImage;
 
+/**
+ * A cache for rendered glyphs. It generates an image for each unique
+ * combination of character, foreground color, and background color.
+ */
 public class GlyphCache {
 
     private final BitmapFont font;
 
     private Image[][][] cache;
 
-    // private final Map<Character, Image> cache = new HashMap<>();
-
+    /**
+     * Creates a new GlyphCache for the given font. The cache will store images for
+     * each character in the font, for all combinations of foreground and background
+     * colors.
+     * 
+     * @param font the bitmap font to use for rendering glyphs
+     */
     public GlyphCache(BitmapFont font) {
         this.font = font;
         cache = new Image[font
                 .getLength()][Color.values().length][Color.values().length];
     }
 
+    /**
+     * Returns the cached image for the given character and colors. If the image
+     * does not exist in the cache, it will be generated and stored before being
+     * returned.
+     * 
+     * @param c  the character to get the glyph for
+     * @param fg the foreground color
+     * @param bg the background color
+     * @return the cached image for the given character and colors
+     */
     public Image getGlyph(char c, Color fg, Color bg) {
         int index = (int) c;
         int fgIndex = fg.ordinal();
@@ -31,6 +50,18 @@ public class GlyphCache {
         return cache[index][fgIndex][bgIndex];
     }
 
+    /**
+     * Generates an image for the given character and colors. The image is created
+     * by
+     * drawing the glyph from the font onto a canvas, applying the foreground color
+     * using a multiply blend mode, and filling the background with the background
+     * color.
+     * 
+     * @param c  the character to generate the glyph for
+     * @param fg the foreground color
+     * @param bg the background color
+     * @return the generated image for the given character and colors
+     */
     private Image generateGlyph(char c, Color fg, Color bg) {
         int width = font.getGlyphWidth();
         int height = font.getGlyphHeight();

@@ -3,6 +3,9 @@ package app.game.rendering;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
+/**
+ * A terminal for rendering a grid of cells using a bitmap font.
+ */
 public class Terminal {
 
     private final GraphicsContext gc;
@@ -12,6 +15,14 @@ public class Terminal {
 
     private final GlyphCache glyphCache;
 
+    /**
+     * Creates a new Terminal for rendering a grid of cells using the given graphics
+     * context and bitmap font.
+     * 
+     * @param gc    the graphics context to use for rendering
+     * @param font  the bitmap font to use for rendering glyphs
+     * @param cells the grid of cells to render
+     */
     public Terminal(GraphicsContext gc, BitmapFont font, Cell[][] cells) {
         this.gc = gc;
         this.font = font;
@@ -19,32 +30,14 @@ public class Terminal {
         this.glyphCache = new GlyphCache(font);
     }
 
-    // public void render(int cols, int rows) {
-
-    // gc.clearRect(0, 0,
-    // cols * font.getGlyphWidth(),
-    // rows * font.getGlyphHeight());
-
-    // // clear entire canvas to black
-    // gc.setFill(javafx.scene.paint.Color.BLACK);
-    // int h = (int) gc.getCanvas().getHeight();
-    // int w = (int) gc.getCanvas().getWidth();
-    // gc.fillRect(0, 0, w, h);
-
-    // for (int y = 0; y < rows; y++) {
-    // for (int x = 0; x < cols; x++) {
-
-    // Cell c = cells[y][x];
-
-    // // character
-    // font.drawChar(gc,
-    // c.character,
-    // x * font.getGlyphWidth(),
-    // y * font.getGlyphHeight(), c.fg);
-    // }
-    // }
-    // }
-
+    /**
+     * Renders the terminal by drawing each cell's character using the appropriate
+     * foreground and background colors. The glyphs are retrieved from the glyph
+     * cache to improve performance.
+     * 
+     * @param cols the number of columns to render
+     * @param rows the number of rows to render
+     */
     public void render(int cols, int rows) {
 
         gc.clearRect(0, 0,
@@ -69,6 +62,9 @@ public class Terminal {
         }
     }
 
+    /**
+     * Clears the terminal by resetting all cells to their default state.
+     */
     public void clear() {
         for (Cell[] row : cells) {
             for (Cell cell : row) {

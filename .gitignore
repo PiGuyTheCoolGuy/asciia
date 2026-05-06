@@ -6,3 +6,4 @@ out/
 .prettierignore
 .VSCodeCounter/
 roadmap.md
+checkstyle.xml

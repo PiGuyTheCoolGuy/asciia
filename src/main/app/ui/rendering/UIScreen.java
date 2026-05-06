@@ -25,6 +25,10 @@ import javafx.scene.robot.Robot;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+/**
+ * Represents the UI screen for the game. This screen will contain the interface
+ * that the DM uses to manage everything in the game.
+ */
 public class UIScreen extends Screen {
 
     private Label cameraLabel;
@@ -34,6 +38,14 @@ public class UIScreen extends Screen {
 
     private ControlPanel controlPanel;
 
+    /**
+     * Create a new UI screen with the given title, input handler, and control
+     * panel.
+     * 
+     * @param title        The title of the screen.
+     * @param input        The input handler for the screen.
+     * @param controlPanel The control panel for the game instance.
+     */
     public UIScreen(String title, InputHandler input, ControlPanel controlPanel) {
         super(title, input);
         this.controlPanel = controlPanel;
@@ -81,16 +93,6 @@ public class UIScreen extends Screen {
         Button submit = new Button("Set Camera");
 
         submit.setOnAction(e -> {
-            /*
-             * try {
-             * int x = Integer.parseInt(cameraXField.getText());
-             * int y = Integer.parseInt(cameraYField.getText());
-             * 
-             * controlPanel.setCamera(new Vec2i(x, y)); // adjust to your API
-             * } catch (NumberFormatException ex) {
-             * System.out.println("Invalid camera input");
-             * }
-             */
 
             int x = Integer.parseInt(cameraXField.getText());
             int y = Integer.parseInt(cameraYField.getText());
@@ -110,6 +112,12 @@ public class UIScreen extends Screen {
 
     }
 
+    /**
+     * Show a dialog to select which display to use for the game instance. This will
+     * return the index of the selected display.
+     * 
+     * @return The index of the selected display.
+     */
     public int selectGameInstanceDisplay() {
 
         Stage dialog = new Stage();

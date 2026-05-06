@@ -1,5 +1,10 @@
 package app.game.rendering;
 
+/**
+ * An enumeration representing a set of colors that can be used for rendering in
+ * the game. Each color can be converted to a corresponding JavaFX color for use
+ * in rendering operations.
+ */
 public enum Color {
     BLACK,
     RED,
@@ -18,6 +23,12 @@ public enum Color {
     BRIGHT_CYAN,
     BRIGHT_WHITE;
 
+    /**
+     * Converts the given Color enum value to its corresponding JavaFX color.
+     * 
+     * @param color The Color enum value to convert.
+     * @return The corresponding JavaFX color.
+     */
     public static javafx.scene.paint.Color getJFXColor(Color color) {
         switch (color) {
             case BLACK:

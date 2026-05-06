@@ -18,6 +18,10 @@ Examples:
     ┼   BOX_1111
 */
 
+/**
+ * This is the mapping of <code>/app/assets/fonts/vga2_16x15.png</code>. Each
+ * item in the set is the index of it's corresponding texture in the image.
+ */
 public class CharSet {
     public static final int SPACE = 0x00;
     public static final int SMILEY_BLACK = 0x01;
@@ -251,7 +255,7 @@ public class CharSet {
     public static final int SIGMA_LOWERCASE = 0xE5;
     public static final int MU = 0xE6;
     public static final int TAU = 0xE7;
-    public static final int O_WITH_LINE_ON_TOP_AND_BOTTOM = 0xE8; // TODO: Find a better name for this one
+    public static final int O_WITH_LINE_ON_TOP_AND_BOTTOM = 0xE8;
     public static final int THETA = 0xE9;
     public static final int OMEGA = 0xEA;
     public static final int DELTA = 0xEB;
