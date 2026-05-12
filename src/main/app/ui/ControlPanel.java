@@ -46,6 +46,7 @@ public class ControlPanel {
      */
     public void setGameInstance(GameInstance gameInstance) {
         this.gameInstance = gameInstance;
+        screen.setGameInstance(gameInstance);
     }
 
     /**
@@ -136,6 +137,10 @@ public class ControlPanel {
      */
     public void enqueueCommand(Command command) {
         gameInstance.enqueue(command);
+    }
+
+    public GameInstance getGameInstance() {
+        return gameInstance;
     }
 
 }

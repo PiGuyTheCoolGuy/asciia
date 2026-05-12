@@ -6,6 +6,7 @@ import app.InputHandler;
 import app.Screen;
 import app.Vec2i;
 import app.command.MoveCameraCommand;
+import app.game.GameInstance;
 import app.ui.ControlPanel;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
@@ -36,6 +37,9 @@ public class UIScreen extends Screen {
     private TextField cameraXField;
     private TextField cameraYField;
 
+    private VBox commandPanel;
+    private Button executeCommandButton;
+
     private ControlPanel controlPanel;
 
     /**
@@ -51,6 +55,20 @@ public class UIScreen extends Screen {
         this.controlPanel = controlPanel;
 
         container.setStyle("-fx-background-color: black;");
+
+        commandPanel = new VBox(10);
+        commandPanel.layoutXProperty()
+                .bind(container.widthProperty().subtract(commandPanel.widthProperty()));
+
+        commandPanel.prefHeightProperty().bind(container.heightProperty());
+        commandPanel.setPrefWidth(300);
+        commandPanel.setStyle("-fx-border-color: magenta; -fx-border-width: 1; -fx-padding: 10;");
+
+        executeCommandButton = new Button("Execute commands");
+        // executeCommandButton.layoutXProperty()
+        // .bind(commandPanel.widthProperty().subtract(executeCommandButton.widthProperty()));
+        // executeCommandButton.layoutYProperty()
+        // .bind(commandPanel.heightProperty().subtract(executeCommandButton.heightProperty()));
 
         cameraPanel = new VBox(5);
         cameraPanel.setStyle(
@@ -97,15 +115,21 @@ public class UIScreen extends Screen {
             int x = Integer.parseInt(cameraXField.getText());
             int y = Integer.parseInt(cameraYField.getText());
 
-            controlPanel.enqueueCommand(new MoveCameraCommand(controlPanel.getCamera(), new Vec2i(x, y), 1.5));
+            controlPanel
+                    .enqueueCommand(
+                            new MoveCameraCommand(new Vec2i(x, y), 1.5, commandPanel));
+            // new MoveCameraCommand(controlPanel.getCamera(), new Vec2i(x, y), 1.5,
+            // commandPanel));
 
         });
 
         // --- Assemble panel
         cameraPanel.getChildren().addAll(cameraLabel, inputRow, submit);
 
+        commandPanel.getChildren().add(executeCommandButton);
+
         // Add to your existing container
-        container.getChildren().add(cameraPanel);
+        container.getChildren().addAll(commandPanel, cameraPanel);
 
         // And finally...
         stage.show();
@@ -211,6 +235,15 @@ public class UIScreen extends Screen {
 
         cameraLabel.setText("Camera: (" + cam.x + ", " + cam.y + ")");
 
+    }
+
+    /**
+     * Sets the <code>GameInstance</code> property for configuration.
+     * 
+     * @param gameInstance The game instance to be tracked.
+     */
+    public void setGameInstance(GameInstance gameInstance) {
+        executeCommandButton.setOnAction(e -> controlPanel.getGameInstance().execute());
     }
 
 }

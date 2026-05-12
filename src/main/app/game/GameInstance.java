@@ -30,6 +30,8 @@ public class GameInstance {
 
     private Vec2i camera = new Vec2i(0, 0);
 
+    private boolean executingCommands;
+
     /**
      * Create a new game instance.
      * 
@@ -62,15 +64,22 @@ public class GameInstance {
             requestStop();
         }
 
-        if (currentCommand == null && !commandQueue.isEmpty()) {
-            currentCommand = commandQueue.poll();
-        }
+        if (executingCommands) {
+            if (currentCommand == null && !commandQueue.isEmpty()) {
+                currentCommand = commandQueue.poll();
+            }
 
-        if (currentCommand != null) {
-            currentCommand.update(this, deltatime);
+            if (currentCommand != null) {
+                currentCommand.update(this, deltatime);
 
-            if (currentCommand.isFinished()) {
-                currentCommand = null;
+                if (currentCommand.isFinished()) {
+                    currentCommand.finish(this);
+                    currentCommand = null;
+                }
+            }
+
+            if (commandQueue.size() == 0 && currentCommand == null) {
+                executingCommands = false;
             }
         }
 
@@ -156,6 +165,15 @@ public class GameInstance {
      */
     public void enqueue(Command command) {
         commandQueue.add(command);
+    }
+
+    /**
+     * Set the state of execution for the commands as true. If the commands are
+     * currently not being executed, this will set them as OK to start. Otherwise,
+     * they will continue as normal.
+     */
+    public void execute() {
+        executingCommands = true;
     }
 
 }
